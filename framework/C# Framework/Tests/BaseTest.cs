@@ -17,7 +17,6 @@ public class BaseTest
         this.Logger.Info("log4net initialized");
         this.Driver = Settings.GetDriver();
         this.Driver.Manage().Window.Maximize();
-        Driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
         this.Logger.Info("Test started");
     }
 
