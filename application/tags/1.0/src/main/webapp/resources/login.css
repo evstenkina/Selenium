@@ -1,0 +1,15 @@
+body{
+	width: 70%;
+	margin-left: 15%;
+	font-family: "tahoma";
+	color: #2B587A;
+	font-size: 0.7em;
+}
+
+.flash, .error{
+	font-style: italic;
+	font-size: 1.5em;	
+}
+
+.flash{	color: green;}
+.error{color: red;}

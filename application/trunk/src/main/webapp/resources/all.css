@@ -1,0 +1,282 @@
+body{
+	width: 70%;
+	margin-left: 15%;
+	font-family: "tahoma";
+	color: #2B587A;
+	font-size: 0.7em;
+}
+
+.header{
+	width:100%;	
+	border-radius:16px;
+	-webkit-border-radius:16px;
+	-moz-border-radius:15px;
+	-khtml-border-radius:10px;
+	border: 2px solid #D3D8E8;
+}
+
+.header a:hover, .footer a:hover{
+	background-color: #E1E7ED;	
+	text-decoration: none;	
+	width: 75px;
+}
+
+.header a, .footer a{
+	width: 75px;
+    color: #2B587A;
+	text-decoration: none;
+}
+.header a:VISITED, .footer a:VISITED{
+	color: #2B587A;
+}
+
+.header .welcome{
+	float: right;
+	padding-right: 5px;		
+	padding-top: 2px;
+}
+
+.header .account{
+	float: right;
+	padding-right: 5px;
+}
+
+.header .navigation{
+	float: left;
+	padding-left: 5px;	
+}
+
+.header .title{
+	padding-top: 2px;
+	padding-left: 5px;	
+	font-size: 2em;	
+}
+
+.footer{
+	width:100%;
+	font-size: 0.7em;
+	border-radius:16px;
+	-webkit-border-radius:16px;
+	-moz-border-radius:15px;
+	-khtml-border-radius:10px;
+	border: 2px solid #D3D8E8;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 5px 0 5px 0;
+}
+
+.content{
+	width:100%;	
+	border-radius:16px;
+	-webkit-border-radius:16px;
+	-moz-border-radius:15px;
+	-khtml-border-radius:10px;
+	border: 2px solid #D3D8E8;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	overflow: auto;
+}
+
+.popular-app{
+	width: 19.6%;
+	
+	float: left;
+	display: block;
+	border: 1px dashed #D3D8E8;
+	text-align: center;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	overflow: auto;
+}
+
+.popular-container .title{
+	padding-top: 2px;
+	padding-left: 5px;	
+	font-size: 2em;		
+}
+
+.popular-container a, .popular-container a:visited, .popular-container a:hover{
+	text-decoration: none;	
+	color: #2B587A;	
+}
+
+.popular-container{	
+	text-align: center;
+	overflow: auto;
+	padding-bottom: 15px;
+	padding-left: 5px;
+	border-bottom: 1px solid  #D3D8E8;
+}
+
+.popular-app img{
+	width:128px;
+	height:128px;
+}
+
+.categories ul{
+	list-style: none outside none;
+	padding-left: 5px; 
+}
+
+.categories li{
+	width : 100px;
+	height: 20px;	
+}
+
+.categories a, .categories a:visited{
+	text-decoration: none;
+	color: #2B587A;		
+}
+
+.categories a:hover{
+	background-color: #E1E7ED;	
+	text-decoration: none;	
+	width: 75px;
+}
+
+.categories{
+	float: left;
+}
+
+.apps-container{
+	float:left;
+	padding-left: 5px;
+	overflow: auto;	
+}
+
+.paging{
+	padding-top: 5px;
+}
+
+.app img {
+	float:left;
+	width:128px;
+	height:128px;
+	padding-top:15px;
+	margin-right: 20px;
+}
+
+.app{
+	overflow: auto;
+	width: 500px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.name{	
+	font-size: 2em;
+}
+
+.description{
+	font-style: italic;
+	margin-bottom: 20px;
+}
+
+.new-app-link{
+	padding-left:10px;
+	background-color: #E1E7ED;
+	width: 150px;
+}
+.new-app-link a, .new-app-link a:visited{
+	text-decoration: none;
+	
+	color: #2B587A;		
+}
+
+.new-app-link a:hover{		
+	text-decoration: none;	
+}
+
+.app a, .app a:visited{
+	text-decoration: underline;
+	color: #2B587A;		
+}
+
+.app a:hover{
+	background-color: #E1E7ED;	
+	text-decoration: underline;	
+	width: 75px;
+}
+
+.paging a, .paging a:visited{
+	text-decoration: underline;
+	color: #2B587A;		
+}
+
+.paging a:hover{
+	background-color: #E1E7ED;	
+	text-decoration: underline;	
+	width: 75px;
+}
+
+.application img{
+	float:left;
+	width: 512px;
+	height: 512px;
+	
+}
+
+.download-button{	
+	color: #2B587A;	
+	
+	overflow: auto;
+	margin-top:150px;
+	margin-bottom:10px;
+	padding-top:10px;
+	padding-bottom:10px;
+	align: center;	
+}
+
+.download-button a:visited, .download-button a, .download-button a:hover{
+	text-decoration: none;
+	background-color: #D3D8E8;
+	color: #2B587A;
+	font-size: 3em;
+	
+	padding-left:5px;
+	padding-right:5px;
+	
+	border-radius:16px;
+	-webkit-border-radius:16px;
+	-moz-border-radius:15px;
+	-khtml-border-radius:10px;
+	border: 2px solid #D3D8E8;	
+}
+
+.edit-app-button{	
+	color: #2B587A;	
+	
+	overflow: auto;
+	
+	padding-top:10px;
+	padding-bottom:10px;
+	align: center;	
+}
+
+.edit-app-button a:visited, .edit-app-button a, .edit-app-button a:hover{
+	text-decoration: none;
+	background-color: #D3D8E8;
+	color: #2B587A;
+	font-size: 1.5em;
+	
+	padding-left:5px;
+	padding-right:5px;
+	
+	border-radius:16px;
+	-webkit-border-radius:16px;
+	-moz-border-radius:15px;
+	-khtml-border-radius:10px;
+	border: 2px solid #D3D8E8;	
+}
+
+table{
+	font-size: 1em;
+}
+
+.flash, .error{
+	font-style: italic;
+	font-size: 1.5em;	
+}
+
+.flash{	color: green;}
+.error{color: red;}

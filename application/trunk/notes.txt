@@ -1,0 +1,2 @@
+1. $ mvn clean cobertura:cobertura embedmongo:start jetty:run
+2. profiles - secure and default simple profile.1
