@@ -21,6 +21,7 @@ namespace Selenium.Pages
         public LoginPage Logout()
         {
             LogOutLink.Click();
+            
             return new LoginPage(Driver);
         }
         #endregion

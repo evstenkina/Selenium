@@ -1,5 +1,10 @@
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Safari;
 using Selenium.Framework;
+using Selenium.Framework.Features;
+using Selenium.Framework.TestData;
 using Selenium.Pages;
 
 namespace Selenium.Tests
@@ -7,29 +12,39 @@ namespace Selenium.Tests
     public class LoginTests : BaseTest
     {
         private User user;
+        private LoginPage LoginPage;
+        private LoginFeature LoginFeature;
 
         [SetUp]
         protected void Initialize()
         {
-            user = User.GetDefaultUser();
+            user = TestDataUsers.GetDefaultUser();
+            LoginPage = new LoginPage(Driver);
+            LoginFeature = new LoginFeature(Driver);
         }
 
         [Test]
         public void ValidLoginTest()
         {
-            HomePage homePage = SiteNavigator.NavigateToLoginPage(Driver).Login(user);
-            Logger.Info("Assert user login");
-            Assert.True(homePage.OnHeader().GetWelcomeText.Contains(user.FirstName));
+            SiteNavigator.NavigateToLoginPage(Driver, true);
+            if (true)
+            {
+                LoginFeature.Login(TestDataUsers.GetDefaultUser());
+                Logger.Info("Assert user login");
+            }
+            else
+            {
+            }
+
+            Assert.That(LoginPage.OnHeader().GetWelcomeText.Contains(user.FirstName));
         }
 
         [Test]
         public void InvalidLoginTest()
         {
-            user.Password = "invalid";
-
-            LoginPage loginPage = SiteNavigator.NavigateToLoginPage(Driver);
-            loginPage.Login(user);
-            Assert.True(loginPage.GetFlashMessage().Contains("invalid username or password"));
+            SiteNavigator.NavigateToLoginPage(Driver);
+            LoginFeature.Login(TestDataUsers.GetInvalidUser());
+            Assert.That(LoginPage.GetFlashMessage().Contains("invalid username or password"));
         }
     }
 }

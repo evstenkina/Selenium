@@ -8,7 +8,7 @@ namespace Selenium.Pages
 
         public BasePage(IWebDriver driver)
         {
-            this.Driver = driver;
+            Driver = driver;
         }
 
         public IWebElement FlashMessage => Driver.FindElement(By.CssSelector(".flash"));

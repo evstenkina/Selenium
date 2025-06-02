@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 public class User
 {  
     public string Login { get; set; }
@@ -7,9 +9,6 @@ public class User
     public string FirstName { get; set; }
 
     public string LastName { get; set; }
-
-    public static User GetDefaultUser()
-    {
-        return new User { Login = "admin", Password = "admin", FirstName = "Ivan", LastName = "Petrov" };
-    }
+    
+    public string Role { get; set; }
 }

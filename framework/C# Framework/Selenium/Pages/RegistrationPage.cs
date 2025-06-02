@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using OpenQA.Selenium;
+using CsvHelper;
+using CsvHelper.Configuration;
+
+namespace Selenium.Pages
+{
+    public class RegistrationPage : BasePage
+    {
+        public RegistrationPage(IWebDriver driver) : base(driver)
+        {
+        }
+        
+        public IWebElement RegisterNewUserButton => Driver.FindElement(By.XPath("//*[@href='../register']"));
+
+        public IWebElement NameBox => Driver.FindElement(By.CssSelector("input[name='name']"));
+
+        public IWebElement FirstNameBox => Driver.FindElement(By.CssSelector("input[name='fname']"));
+
+        public IWebElement LastNameBox => Driver.FindElement(By.CssSelector("input[name='lname']"));
+
+        public IWebElement Password => Driver.FindElement(By.CssSelector("input[name='password']"));
+
+        public IWebElement ConfirmPassword => Driver.FindElement(By.CssSelector("input[name='passwordConfirm']"));
+
+        //TODO Переписать на XPath
+        public IWebElement RoleUser => Driver.FindElement(By.CssSelector(
+            "body > div > form > table > tbody > tr:nth-child(6) > td:nth-child(2) > select > option:nth-child(2)"));
+
+        public IWebElement RoleDeveloper => Driver.FindElement(By.CssSelector(
+            "body > div > form > table > tbody > tr:nth-child(6) > td:nth-child(2) > select > option:nth-child(1)"));
+
+        public IWebElement RegisterButton => Driver.FindElement(By.XPath("//input[@value='Register']"));
+        
+        //public IWebElement LogOutLink => Driver.FindElement(By.LinkText("Logout"));
+    }
+}
