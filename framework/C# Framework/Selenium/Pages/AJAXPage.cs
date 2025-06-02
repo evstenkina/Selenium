@@ -24,7 +24,7 @@ namespace Selenium.Pages
 
         public IWebElement X => Driver.FindElement(By.Id("x"));
 
-        public void SetX(int x)
+        public void Set1X(int x)
         {
             X.SendKeys(x.ToString());
         }
