@@ -12,7 +12,6 @@ namespace Selenium.Framework
         protected IWebDriver Driver;
         protected ILog Logger;
         protected WaitHelper WaitHelper;
-        //protected ScreenshotHelper ScreenshotHelper;
         
         [SetUp]
         public virtual void Init()
