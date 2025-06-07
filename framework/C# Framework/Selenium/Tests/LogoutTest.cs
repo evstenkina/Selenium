@@ -18,7 +18,7 @@ namespace Selenium.Tests
         LoginPage LoginPage;
         string baseUrl = ConfigurationManager.AppSettings["baseUrl"];
         private LoginFeature LoginFeature;
-        private ApplicationFeatures ApplicationFeatures;
+        private ApplicationPage ApplicationPage;
         private Header Header;
 
         [SetUp]
@@ -27,7 +27,7 @@ namespace Selenium.Tests
             user = TestDataUsers.GetDefaultUser();
             LoginPage = SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature = new LoginFeature(Driver);
-            ApplicationFeatures = new ApplicationFeatures(Driver);
+            ApplicationPage = new ApplicationPage(Driver);
             Header = new Header(Driver);
         }
 
@@ -42,7 +42,7 @@ namespace Selenium.Tests
             Header.Logout();
             List<string> tabs = Driver.WindowHandles.ToList();
             Driver.SwitchTo().Window(tabs[0]);
-            ApplicationFeatures.OpenApplicationPage();
+            ApplicationPage.OpenApplicationPage();
             Assert.That(LoginPage.LoginButton.Displayed, Is.True);;
         }
     }

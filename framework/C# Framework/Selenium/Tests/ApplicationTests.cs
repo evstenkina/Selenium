@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.Framework;
 using Selenium.Framework.Features;
+using Selenium.Framework.Models;
 using Selenium.Framework.TestData;
 using Selenium.Pages;
 
@@ -16,6 +17,7 @@ namespace Selenium.Tests
         private LoginFeature LoginFeature;
         private ApplicationPage ApplicationPage;
         private ApplicationFeatures ApplicationFeatures;
+        private JSONData JSONData;
 
         [SetUp]
         protected void Initialize()
@@ -24,6 +26,7 @@ namespace Selenium.Tests
             LoginFeature = new LoginFeature(Driver);
             ApplicationPage = new ApplicationPage(Driver);
             ApplicationFeatures = new ApplicationFeatures(Driver);
+            JSONData = new JSONData();
         }
 
         [Test]
@@ -32,9 +35,9 @@ namespace Selenium.Tests
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert _testDataUsers login");
-            ApplicationFeatures.OpenMyApplicationPage();
+            ApplicationPage.OpenMyApplicationPage();
             ApplicationFeatures.AddAppWithoutImage();
-            ApplicationFeatures.OpenCreatedAppPage();
+            ApplicationPage.OpenCreatedAppPage();
             var download = ApplicationPage.Download;
             Assert.That(download.Enabled);
         }
@@ -46,9 +49,9 @@ namespace Selenium.Tests
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert _testDataUsers login");
-            ApplicationFeatures.OpenMyApplicationPage();
+            ApplicationPage.OpenMyApplicationPage();
             ApplicationFeatures.AddAppWithImage();
-            ApplicationFeatures.OpenCreatedAppPage();
+            ApplicationPage.OpenCreatedAppPage();
             var download = ApplicationPage.Download;
             Assert.That(download.Enabled);
         }
@@ -59,10 +62,10 @@ namespace Selenium.Tests
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert _testDataUsers login");
-            ApplicationFeatures.OpenMyApplicationPage();
+            ApplicationPage.OpenMyApplicationPage();
             ApplicationFeatures.AddAppWithoutImage();
-            ApplicationFeatures.OpenCreatedAppPage();
-            ApplicationFeatures.EditApp();
+            ApplicationPage.OpenCreatedAppPage();
+            ApplicationPage.EditApp();
             ApplicationFeatures.UpdateApp();
             Assert.That(ApplicationPage.AppUpdatedText.Equals(ApplicationPage.AppUpdatedText));
         }
@@ -73,10 +76,10 @@ namespace Selenium.Tests
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert _testDataUsers login");
-            ApplicationFeatures.OpenMyApplicationPage();
+            ApplicationPage.OpenMyApplicationPage();
             ApplicationFeatures.AddAppWithoutImage();
-            ApplicationFeatures.OpenCreatedAppPage();
-            ApplicationFeatures.DeleteApp();
+            ApplicationPage.OpenCreatedAppPage();
+            ApplicationPage.DeleteApp();
             Driver.SwitchTo().Alert().Accept();
         }
 
@@ -86,9 +89,9 @@ namespace Selenium.Tests
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert _testDataUsers login");
-            ApplicationFeatures.OpenMyApplicationPage();
+            ApplicationPage.OpenMyApplicationPage();
             ApplicationFeatures.AddAppWithoutImage();
-            ApplicationFeatures.OpenCreatedAppPage();
+            ApplicationPage.OpenCreatedAppPage();
 
             Random rng = new Random();
             int number = rng.Next(1, 7);
@@ -100,7 +103,7 @@ namespace Selenium.Tests
 
             Driver.Navigate().Refresh();
 
-            string actualTitle = ApplicationFeatures.PopularAppTitle();
+            string actualTitle = ApplicationPage.PopularAppTitle();
             string expectedTitle = "This is title for new application";
             Assert.That(actualTitle, Is.EqualTo(expectedTitle));
         }
@@ -111,11 +114,11 @@ namespace Selenium.Tests
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert _testDataUsers login");
-            ApplicationFeatures.OpenApplicationPage();
-            ApplicationFeatures.DownloadApp();
+            ApplicationPage.OpenApplicationPage();
+            ApplicationPage.DownloadApp();
             ApplicationFeatures.GetJSONText();
             ApplicationFeatures.GetApplicationJSONData();
-            ApplicationPage.JSONData jsonApp = ApplicationFeatures.GetApplicationJSONData();
+            JSONData jsonApp = ApplicationFeatures.GetApplicationJSONData();
             string actual = jsonApp.title;
             /*string jsonText = applicationPage.GetJSONText();
             Console.WriteLine("Raw JSON: " + jsonText);
@@ -140,8 +143,5 @@ namespace Selenium.Tests
             string Title = "Application Information 1";
             Assert.That(actual, Is.EqualTo(Title));
         }
-        
-       
-
     }
 }

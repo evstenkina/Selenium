@@ -18,7 +18,7 @@ namespace Selenium.Tests
         private RegistrationPage RegistrationPage;
         private ApplicationPage ApplicationPage;
         private LoginFeature LoginFeature;
-        private ApplicationFeatures ApplicationFeatures;
+        private HomePage HomePage;
 
         [SetUp]
         protected void Initialize()
@@ -29,7 +29,7 @@ namespace Selenium.Tests
             RegistrationPage = new RegistrationPage(Driver);
             ApplicationPage = new ApplicationPage(Driver);
             LoginFeature = new LoginFeature(Driver);
-            ApplicationFeatures = new ApplicationFeatures(Driver);
+            HomePage = new HomePage(Driver);
         }
 
         [Test]
@@ -47,8 +47,7 @@ namespace Selenium.Tests
             RegistrationFeatures.RegisterUser(userUser);
             Header header = new Header(Driver);
             header.Logout();
-            LoginPage loginPage = new LoginPage(Driver);
-            LoginFeature.Login(TestDataUsers.GetDefaultUser());
+            LoginFeature.Login(TestDataUsers.GetStenkinaUser());
             Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(userUser.FirstName));
         }
 
@@ -57,11 +56,11 @@ namespace Selenium.Tests
         {
             SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(userDeveloper);
-            ApplicationFeatures.OpenMyApplicationPage();
-            ApplicationFeatures.OpenAddNewAppPage();
-            string appText = ApplicationPage.SubmitButton.Text;
+            ApplicationPage.OpenMyApplicationPage();
+            ApplicationPage.OpenAddNewAppPage();
+            string appText = ApplicationPage.SubmitButton.GetAttribute("value");
             string expectedAppButton = "Create";
-            Assert.That(appText, Is.EqualTo(expectedAppButton));
+            Assert.That(appText.Equals(expectedAppButton));
         }
 
         [Test]
@@ -72,12 +71,13 @@ namespace Selenium.Tests
             bool uploadOption = true;
             try
             {
-                var element = ApplicationPage.MyApplication;
+                var element = HomePage.MyApplication;
             }
             catch (NoSuchElementException)
             {
                 uploadOption = false;
             }
+
             Assert.That(uploadOption.Equals(false));
         }
 

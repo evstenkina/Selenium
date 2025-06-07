@@ -2,6 +2,7 @@ using System;
 using Selenium.Framework.TestData;
 using System.Collections.Generic;
 using OpenQA.Selenium;
+using Selenium.Framework.Models;
 using Selenium.Pages;
 
 namespace Selenium.Framework.Features
@@ -9,19 +10,27 @@ namespace Selenium.Framework.Features
     public class JSFeatures
     {
         private JSPage JSPage;
+        private JSCoordinates JSCoordinates; 
         private IWebDriver Driver;
-        
+
         public JSFeatures(IWebDriver driver)
         {
+            Driver = driver;
             JSPage = new JSPage(driver);
+            JSCoordinates = new JSCoordinates();
         }
-        
-        public void OpenJSTestPage()
+
+        public void SetTopInputField()
         {
-            JSPage.JSTestPage.Click();
+            JSPage.TopInputField.SendKeys(GetCoordinates().Top.ToString());
         }
-        
-        public JSPage.Coordinates GetCoordinates()
+
+        public void SetLeftInputField()
+        {
+            JSPage.LeftInputField.SendKeys(GetCoordinates().Left.ToString());
+        }
+
+        public JSCoordinates.Coordinates GetCoordinates()
         {
             //Приводим Driver к типу IJavaScriptExecutor, чтобы можно было выполнять JavaScript-код в контексте браузера.
             IJavaScriptExecutor JSExecutor = (IJavaScriptExecutor)Driver;
@@ -40,23 +49,8 @@ namespace Selenium.Framework.Features
             //Извлекаем значения top и left из словаря и конвертируем их в int, чтобы использовать в C# как числа.
             var top = Convert.ToInt32(result["top"]);
             var left = Convert.ToInt32(result["left"]);
-            
-            return new JSPage.Coordinates (top, left);
-        }
 
-        public void SetTopInputField()
-        {
-            JSPage.TopInputField.SendKeys(GetCoordinates().Top.ToString());
-        }
-        
-        public void SetLeftInputField()
-        {
-            JSPage.LeftInputField.SendKeys(GetCoordinates().Left.ToString());
-        }
-        
-        public void ClickProcessButton()
-        {
-            JSPage.Process.Click();
+            return new JSCoordinates.Coordinates(top, left);
         }
     }
 }

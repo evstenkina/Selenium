@@ -9,6 +9,7 @@ namespace Selenium.Tests
 {
     public class JSTest : BaseTest
     {
+        private User _testDataUsers;
         private LoginFeature loginFeature;
         private JSPage JSPage;
         private JSFeatures JSFeatures;
@@ -16,6 +17,7 @@ namespace Selenium.Tests
         [SetUp]
         protected void Initialize()
         {
+            _testDataUsers = TestDataUsers.GetDefaultUser();
             loginFeature = new LoginFeature(Driver);
             JSPage = new JSPage(Driver);
             JSFeatures = new JSFeatures(Driver);
@@ -26,14 +28,15 @@ namespace Selenium.Tests
         {
             SiteNavigator.NavigateToLoginPage(Driver);
             loginFeature.Login(TestDataUsers.GetDefaultUser());
-            JSFeatures.OpenJSTestPage();
+            Logger.Info("Assert _testDataUsers login");
+            JSPage.OpenJSTestPage();
             JSFeatures.GetCoordinates();
             JSFeatures.SetTopInputField();
             JSFeatures.SetLeftInputField();
-            JSFeatures.ClickProcessButton();
+            JSPage.ClickProcessButton();
             IAlert alert = Driver.SwitchTo().Alert();
-            string alertText = "Whoo Hoooo! Correct!";
-            Assert.That(alertText, Is.EqualTo(alert.Text));
+            string expectedAlertText = "Whoo Hoooo! Correct!";
+            Assert.That(expectedAlertText, Is.EqualTo(alert.Text));
         }
     }
 }

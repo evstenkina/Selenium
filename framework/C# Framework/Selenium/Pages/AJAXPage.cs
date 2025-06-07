@@ -3,26 +3,32 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Selenium.Framework.Features;
 using SeleniumExtras.WaitHelpers;
 
 namespace Selenium.Pages
 {
     public class AJAXPage : BasePage
     {
+        private HomePage HomePage;
+        private WaitHelper WaitHelper;
         public AJAXPage(IWebDriver driver) : base(driver)
         {
+            HomePage = new HomePage(driver);
+            WaitHelper = new WaitHelper(driver);
         }
         
-        //TODO перенести методы после локаторов
-
-        public IWebElement AjaxPage => Driver.FindElement(By.XPath("//a[contains(@href, 'calc')]"));
+        public IWebElement X => Driver.FindElement(By.Id("x"));
+        public IWebElement Y => Driver.FindElement(By.Id("y"));
+        public IWebElement SumButton => Driver.FindElement(By.Id("calc"));
+        public IWebElement ResultText => Driver.FindElement(resultTextLocator);
+        
+        By resultTextLocator = By.Id("result");
 
         public void OpenAjaxPage()
         {
-            AjaxPage.Click();
+            HomePage.AjaxPage.Click();
         }
-
-        public IWebElement X => Driver.FindElement(By.Id("x"));
 
         public void SetX(int x)
         {
@@ -33,8 +39,6 @@ namespace Selenium.Pages
         {
             X.SendKeys(x);
         }
-        
-        public IWebElement Y => Driver.FindElement(By.Id("y"));
 
         public void SetY(string y)
         {
@@ -45,23 +49,17 @@ namespace Selenium.Pages
         {
             Y.SendKeys(y.ToString());
         }
-
-        public IWebElement SumButton => Driver.FindElement(By.Id("calc"));
-
+        
         public void ClickSumButton()
         {
             SumButton.Click();
         }
 
-        public string GetResultText() //can I do so????
+        public string GetResultText() 
         {
-            return Driver.FindElement(By.Id("result")).Text;
+            WaitHelper.WaitForElement(resultTextLocator); 
+            
+            return ResultText.Text;
         }
-        
- 
-        
-
-        /*WebDriverWait wait => new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
-        IWebElement element => wait.Until(ExpectedConditions.ElementIsVisible(By.Id("result")));*/
     }
 }

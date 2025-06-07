@@ -12,6 +12,7 @@ namespace Selenium.Tests
         private User _testDataUsers;
         private LoginFeature loginFeature;
         private AJAXPage ajaxPage;
+        private WaitHelper WaitHelper;
 
         [SetUp]
         protected void Initialize()
@@ -19,6 +20,7 @@ namespace Selenium.Tests
             _testDataUsers = TestDataUsers.GetDefaultUser();
             loginFeature = new LoginFeature(Driver);
             ajaxPage = new AJAXPage(Driver);
+            WaitHelper = new WaitHelper(Driver);
             SiteNavigator.NavigateToLoginPage(Driver);
         }
 
@@ -32,9 +34,8 @@ namespace Selenium.Tests
             ajaxPage.SetX("1");
             ajaxPage.SetY(2);
             ajaxPage.ClickSumButton();
-            WaitHelper.WaitForElement(By.Id("result")); //TODO использовать в другом месте, добавить локатор
             string result = ajaxPage.GetResultText();
-            Assert.Equals(result, expectedText);
+            Assert.That(result, Is.EqualTo(expectedText));
         }
 
         [Test]
@@ -46,10 +47,9 @@ namespace Selenium.Tests
             ajaxPage.SetX(1);
             ajaxPage.SetY("a");
             ajaxPage.ClickSumButton();
-            WaitHelper.WaitForElement(By.Id("result"));
-            ajaxPage.GetResultText(); //= Contains.Value("Result is: Incorrect data").ToString();
-            string resultText = "Result is: Incorrect data"; //Assert does not work
-            //Assert.IsTrue(ajaxPage.Result().Equals(resultText));
+            ajaxPage.GetResultText();
+            string resultText = "Result is: Incorrect data"; 
+            Assert.That(ajaxPage.GetResultText().Equals(resultText));
         }
     }
 }
