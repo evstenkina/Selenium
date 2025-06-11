@@ -9,33 +9,30 @@ namespace Selenium.Tests
 {
     public class JSTest : BaseTest
     {
-        private User _testDataUsers;
         private LoginFeature loginFeature;
-        private JSPage JSPage;
         private JSFeatures JSFeatures;
+        private HomePage HomePage;
 
         [SetUp]
         protected void Initialize()
         {
-            _testDataUsers = TestDataUsers.GetDefaultUser();
             loginFeature = new LoginFeature(Driver);
-            JSPage = new JSPage(Driver);
             JSFeatures = new JSFeatures(Driver);
+            HomePage = new HomePage(Driver);
         }
 
         [Test]
         public void GetCoordinates()
         {
+            string expectedAlertText = "Whoo Hoooo! Correct!";
             SiteNavigator.NavigateToLoginPage(Driver);
             loginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            JSPage.OpenJSTestPage();
-            JSFeatures.GetCoordinates();
-            JSFeatures.SetTopInputField();
-            JSFeatures.SetLeftInputField();
-            JSPage.ClickProcessButton();
+            Logger.Info("Assert default user login");
+            
+            HomePage.OpenJSTestPage();
+            JSFeatures.Execute();
+            
             IAlert alert = Driver.SwitchTo().Alert();
-            string expectedAlertText = "Whoo Hoooo! Correct!";
             Assert.That(expectedAlertText, Is.EqualTo(alert.Text));
         }
     }

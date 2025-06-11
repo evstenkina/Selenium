@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -19,6 +18,7 @@ namespace Selenium.Tests
         private ApplicationPage ApplicationPage;
         private LoginFeature LoginFeature;
         private HomePage HomePage;
+        private Header Header;
 
         [SetUp]
         protected void Initialize()
@@ -30,6 +30,7 @@ namespace Selenium.Tests
             ApplicationPage = new ApplicationPage(Driver);
             LoginFeature = new LoginFeature(Driver);
             HomePage = new HomePage(Driver);
+            Header = new Header(Driver);
         }
 
         [Test]
@@ -37,6 +38,7 @@ namespace Selenium.Tests
         {
             SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(userUser);
+            
             Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(userUser.FirstName));
         }
 
@@ -45,21 +47,22 @@ namespace Selenium.Tests
         {
             SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(userUser);
-            Header header = new Header(Driver);
-            header.Logout();
+            Header.Logout();
             LoginFeature.Login(TestDataUsers.GetStenkinaUser());
+            
             Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(userUser.FirstName));
         }
 
         [Test]
         public void RegisterDeveloperTest()
         {
+            string expectedAppButton = "Create";
             SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(userDeveloper);
-            ApplicationPage.OpenMyApplicationPage();
+            HomePage.OpenMyApplicationPage();
             ApplicationPage.OpenAddNewAppPage();
+            
             string appText = ApplicationPage.SubmitButton.GetAttribute("value");
-            string expectedAppButton = "Create";
             Assert.That(appText.Equals(expectedAppButton));
         }
 

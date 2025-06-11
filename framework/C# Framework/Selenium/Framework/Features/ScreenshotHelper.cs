@@ -7,11 +7,9 @@ namespace Selenium.Framework.Features
 {
     public static class ScreenshotHelper
     {
-       // private static IWebDriver Driver;
-        
-        public static void TakeScreenshot(IWebDriver driver) 
+        public static void TakeScreenshot(IWebDriver driver)
         {
-            Screenshot screenshot= ((ITakesScreenshot)driver).GetScreenshot();
+            Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
             var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             var testName = TestContext.CurrentContext.Test.Name;
             var fileName = $"{testName}_{timestamp}.png";

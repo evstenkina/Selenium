@@ -7,28 +7,25 @@ namespace Selenium.Pages
     {
         public LoginPage(IWebDriver driver) : base(driver)
         {
-            
         }
 
         public IWebElement UsernameBox => Driver.FindElement(By.Id("j_username"));
         public IWebElement PasswordBox => Driver.FindElement(By.Id("j_password"));
         public IWebElement LoginButton => Driver.FindElement(By.XPath("//input[@value='Login']"));
-        //public IWebElement RegisterLink => Driver.FindElement(By.PartialLinkText("Register"));
 
         public void ClickLoginButton()
         {
             LoginButton.Click();
         }
-        
+
         public void EnterUsername(string username)
         {
             UsernameBox.SendKeys(username);
         }
-        
+
         public void EnterPassword(string password)
         {
             PasswordBox.SendKeys(password);
         }
-        
     }
 }

@@ -12,24 +12,20 @@ namespace Selenium.Pages
     {
         private HomePage HomePage;
         private WaitHelper WaitHelper;
+
         public AJAXPage(IWebDriver driver) : base(driver)
         {
             HomePage = new HomePage(driver);
             WaitHelper = new WaitHelper(driver);
         }
+
+        By resultTextLocator = By.Id("result");
         
         public IWebElement X => Driver.FindElement(By.Id("x"));
         public IWebElement Y => Driver.FindElement(By.Id("y"));
         public IWebElement SumButton => Driver.FindElement(By.Id("calc"));
         public IWebElement ResultText => Driver.FindElement(resultTextLocator);
         
-        By resultTextLocator = By.Id("result");
-
-        public void OpenAjaxPage()
-        {
-            HomePage.AjaxPage.Click();
-        }
-
         public void SetX(int x)
         {
             X.SendKeys(x.ToString());
@@ -44,21 +40,21 @@ namespace Selenium.Pages
         {
             Y.SendKeys(y);
         }
-        
+
         public void SetY(int y)
         {
             Y.SendKeys(y.ToString());
         }
-        
+
         public void ClickSumButton()
         {
             SumButton.Click();
         }
 
-        public string GetResultText() 
+        public string GetResultText()
         {
-            WaitHelper.WaitForElement(resultTextLocator); 
-            
+            WaitHelper.WaitForElement(resultTextLocator);
+
             return ResultText.Text;
         }
     }

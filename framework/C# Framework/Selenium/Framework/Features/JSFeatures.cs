@@ -10,31 +10,41 @@ namespace Selenium.Framework.Features
     public class JSFeatures
     {
         private JSPage JSPage;
-        private JSCoordinates JSCoordinates; 
         private IWebDriver Driver;
 
         public JSFeatures(IWebDriver driver)
         {
             Driver = driver;
             JSPage = new JSPage(driver);
-            JSCoordinates = new JSCoordinates();
         }
 
-        public void SetTopInputField()
+        public void Execute()
         {
-            JSPage.TopInputField.SendKeys(GetCoordinates().Top.ToString());
+            GetCoordinates();
+            SetTopInputField();
+            SetLeftInputField();
+            ClickProcessButton();
         }
 
-        public void SetLeftInputField()
+        private void ClickProcessButton()
         {
-            JSPage.LeftInputField.SendKeys(GetCoordinates().Left.ToString());
+            JSPage.ClickProcessButton();
         }
 
-        public JSCoordinates.Coordinates GetCoordinates()
+        private void SetTopInputField()
+        {
+            JSPage.TopInputFieldSendKeys(GetCoordinates().Top.ToString());
+        }
+        
+        private void SetLeftInputField()
+        {
+            JSPage.LeftInputFieldSendKeys(GetCoordinates().Left.ToString());
+        }
+
+        private JSCoordinates.Coordinates GetCoordinates()
         {
             //Приводим Driver к типу IJavaScriptExecutor, чтобы можно было выполнять JavaScript-код в контексте браузера.
             IJavaScriptExecutor JSExecutor = (IJavaScriptExecutor)Driver;
-
             string script = @"
             var el = arguments[0];
             var rect = el.getBoundingClientRect();

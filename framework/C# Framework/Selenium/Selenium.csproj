@@ -164,9 +164,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\BaseTest.cs" />
+    <Compile Include="Framework\Features\AJAXFeatures.cs" />
     <Compile Include="Framework\Features\ApplicationFeatures.cs" />
     <Compile Include="Framework\Features\JSFeatures.cs" />
     <Compile Include="Framework\Features\LoginFeature.cs" />
+    <Compile Include="Framework\Features\LogoutFeatures.cs" />
     <Compile Include="Framework\Features\RegistrationFeatures.cs" />
     <Compile Include="Framework\Features\ScreenshotHelper.cs" />
     <Compile Include="Framework\Features\WaitHelper.cs" />

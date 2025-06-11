@@ -21,10 +21,6 @@ namespace Selenium.Framework
         //TODO сделать переменную для PATH
         public static IWebDriver GetDriver()
         {
-            /*new DriverManager().SetUpDriver(new ChromeConfig());
-            var options = new ChromeOptions();
-            options.AddArgument("--disable-build-check"); */
-            
             switch (GetBrowserType())
             {
                 case "chrome":

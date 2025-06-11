@@ -1,11 +1,7 @@
 using System;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using Selenium.Framework;
 using Selenium.Framework.Features;
-using Selenium.Framework.Models;
 using Selenium.Framework.TestData;
 using Selenium.Pages;
 
@@ -13,135 +9,105 @@ namespace Selenium.Tests
 {
     public class ApplicationTests : BaseTest
     {
-        private User _testDataUsers;
         private LoginFeature LoginFeature;
         private ApplicationPage ApplicationPage;
         private ApplicationFeatures ApplicationFeatures;
-        private JSONData JSONData;
+        private HomePage HomePage;
 
         [SetUp]
         protected void Initialize()
         {
-            _testDataUsers = TestDataUsers.GetDefaultUser();
             LoginFeature = new LoginFeature(Driver);
             ApplicationPage = new ApplicationPage(Driver);
             ApplicationFeatures = new ApplicationFeatures(Driver);
-            JSONData = new JSONData();
+            HomePage = new HomePage(Driver);
         }
 
         [Test]
         public void CreateAppWithoutImage()
         {
-            SiteNavigator.NavigateToLoginPage(Driver);
-            LoginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            ApplicationPage.OpenMyApplicationPage();
+            ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithoutImage();
             ApplicationPage.OpenCreatedAppPage();
-            var download = ApplicationPage.Download;
-            Assert.That(download.Enabled);
+            
+            var downloadOption = ApplicationPage.Download;
+            Assert.That(downloadOption.Enabled);
         }
-
-
+        
         [Test]
         public void CreateAppWithImage()
         {
-            SiteNavigator.NavigateToLoginPage(Driver);
-            LoginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            ApplicationPage.OpenMyApplicationPage();
+            ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithImage();
             ApplicationPage.OpenCreatedAppPage();
-            var download = ApplicationPage.Download;
-            Assert.That(download.Enabled);
+            
+            var downloadOption = ApplicationPage.Download;
+            Assert.That(downloadOption.Enabled);
         }
 
         [Test]
         public void UpdateAppWithoutImage()
         {
-            SiteNavigator.NavigateToLoginPage(Driver);
-            LoginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            ApplicationPage.OpenMyApplicationPage();
+            string expectedText = "Application edited";
+            ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithoutImage();
+            
             ApplicationPage.OpenCreatedAppPage();
             ApplicationPage.EditApp();
             ApplicationFeatures.UpdateApp();
-            Assert.That(ApplicationPage.AppUpdatedText.Equals(ApplicationPage.AppUpdatedText));
+            
+            string actualText = ApplicationPage.AppUpdatedConfirmation();
+            Assert.That(actualText.Equals(expectedText));
         }
 
         [Test]
         public void DeleteApp()
         {
-            SiteNavigator.NavigateToLoginPage(Driver);
-            LoginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            ApplicationPage.OpenMyApplicationPage();
+            ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithoutImage();
             ApplicationPage.OpenCreatedAppPage();
             ApplicationPage.DeleteApp();
+            
             Driver.SwitchTo().Alert().Accept();
+            var extectedText = ApplicationPage.DeletedAppConfirm;
+            Assert.That(extectedText.Displayed);
+            
+            HomePage.OpenMyApplicationPage();
+
+            Assert.That(ApplicationFeatures.SearchForDeletedApp(), Is.True);
         }
+        
 
         [Test]
         public void PopularApps()
         {
-            SiteNavigator.NavigateToLoginPage(Driver);
-            LoginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            ApplicationPage.OpenMyApplicationPage();
+            string expectedTitle = "This is title for new application";
+            ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithoutImage();
             ApplicationPage.OpenCreatedAppPage();
-
-            Random rng = new Random();
-            int number = rng.Next(1, 7);
-            for (int i = 0; i < number; i++)
-            {
-                ApplicationPage.Download.Click();
-                Driver.Navigate().Back();
-            }
-
-            Driver.Navigate().Refresh();
-
+            
+            int downloadNumber = new Random().Next(1, 7);
+            ApplicationFeatures.DownloadAppMultipleTimes(downloadNumber);
+            
             string actualTitle = ApplicationPage.PopularAppTitle();
-            string expectedTitle = "This is title for new application";
             Assert.That(actualTitle, Is.EqualTo(expectedTitle));
         }
 
         [Test]
         public void JSONTest()
         {
+            string expectedTitle = "Application Information 1";
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
+            Logger.Info("Assert default user login");
+            
             ApplicationPage.OpenApplicationPage();
             ApplicationPage.DownloadApp();
             ApplicationFeatures.GetJSONText();
-            ApplicationFeatures.GetApplicationJSONData();
-            JSONData jsonApp = ApplicationFeatures.GetApplicationJSONData();
-            string actual = jsonApp.title;
-            /*string jsonText = applicationPage.GetJSONText();
-            Console.WriteLine("Raw JSON: " + jsonText);
             
-            ApplicationPage.JSONData CheckJSON()
-            {
-
-                try
-                {
-                    var data = JsonConvert.DeserializeObject<ApplicationPage.JSONData>(jsonText);
-                    if (data == null)
-                        Console.WriteLine("Failed to deserialize JSON.");
-                    return data;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error during JSON deserialization: " + ex.Message);
-                    return null;
-                }
-            }
-            CheckJSON();*/
-            string Title = "Application Information 1";
-            Assert.That(actual, Is.EqualTo(Title));
+            string actualTitle = ApplicationFeatures.GetApplicationJSONData().title;
+            Assert.That(actualTitle, Is.EqualTo(expectedTitle));
         }
     }
+    
 }

@@ -19,5 +19,11 @@ namespace Selenium.Framework.Features
             wait.Timeout = TimeSpan.FromSeconds(timeout);
             wait.Until(ExpectedConditions.ElementIsVisible(locator));
         }
+        
+        public void WaitForElementNotExist(By locator, int timeout = 10)
+        {
+            wait.Timeout = TimeSpan.FromSeconds(timeout);
+            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(locator)); 
+        }
     }
 }

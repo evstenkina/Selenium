@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -11,8 +10,6 @@ namespace Selenium.Framework
     {
         protected IWebDriver Driver;
         protected ILog Logger;
-        protected WaitHelper WaitHelper;
-        //protected ScreenshotHelper ScreenshotHelper;
         
         [SetUp]
         public virtual void Init()

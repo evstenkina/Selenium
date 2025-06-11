@@ -14,11 +14,14 @@ namespace Selenium.Framework.Features
             HomePage = new HomePage(driver);
         }
         
-        public HomePage Login(User user)
+        public HomePage Login(User user, bool isBaseURL = true)
         {
-            LoginPage.EnterUsername(user.Login);
-            LoginPage.EnterPassword(user.Password);
-            LoginPage.ClickLoginButton();
+            if (isBaseURL)
+            {
+                LoginPage.EnterUsername(user.Login);
+                LoginPage.EnterPassword(user.Password);
+                LoginPage.ClickLoginButton();
+            }
             
             return HomePage;
         }

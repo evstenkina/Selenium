@@ -14,7 +14,7 @@ namespace Selenium.Pages
         public RegistrationPage(IWebDriver driver) : base(driver)
         {
         }
-        
+
         public IWebElement RegisterNewUserButton => Driver.FindElement(By.XPath("//*[@href='../register']"));
 
         public IWebElement NameBox => Driver.FindElement(By.CssSelector("input[name='name']"));
@@ -26,16 +26,12 @@ namespace Selenium.Pages
         public IWebElement Password => Driver.FindElement(By.CssSelector("input[name='password']"));
 
         public IWebElement ConfirmPassword => Driver.FindElement(By.CssSelector("input[name='passwordConfirm']"));
+        
+        public IWebElement RoleUser => Driver.FindElement(By.XPath("//option[@value='USER']"));
 
-        //TODO Переписать на XPath
-        public IWebElement RoleUser => Driver.FindElement(By.CssSelector(
-            "body > div > form > table > tbody > tr:nth-child(6) > td:nth-child(2) > select > option:nth-child(2)"));
-
-        public IWebElement RoleDeveloper => Driver.FindElement(By.CssSelector(
-            "body > div > form > table > tbody > tr:nth-child(6) > td:nth-child(2) > select > option:nth-child(1)"));
+        public IWebElement RoleDeveloper => Driver.FindElement(By.XPath("//option[@value='DEVELOPER']"));
 
         public IWebElement RegisterButton => Driver.FindElement(By.XPath("//input[@value='Register']"));
         
-        //public IWebElement LogOutLink => Driver.FindElement(By.LinkText("Logout"));
     }
 }

@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using OpenQA.Selenium;
 using Selenium.Framework;
 using Selenium.Framework.Features;
 using Selenium.Framework.TestData;
@@ -9,18 +8,18 @@ namespace Selenium.Tests
 {
     public class AJAXTest : BaseTest
     {
-        private User _testDataUsers;
-        private LoginFeature loginFeature;
+        private LoginFeature LoginFeature;
         private AJAXPage ajaxPage;
-        private WaitHelper WaitHelper;
+        private HomePage homePage;
+        private AJAXFeatures ajaxFeatures;
 
         [SetUp]
         protected void Initialize()
         {
-            _testDataUsers = TestDataUsers.GetDefaultUser();
-            loginFeature = new LoginFeature(Driver);
+            LoginFeature = new LoginFeature(Driver);
             ajaxPage = new AJAXPage(Driver);
-            WaitHelper = new WaitHelper(Driver);
+            homePage = new HomePage(Driver);
+            ajaxFeatures = new AJAXFeatures(Driver);
             SiteNavigator.NavigateToLoginPage(Driver);
         }
 
@@ -28,28 +27,26 @@ namespace Selenium.Tests
         public void ValidCalculation()
         {
             string expectedText = "Result is: 3.0";
-            loginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            ajaxPage.OpenAjaxPage();
-            ajaxPage.SetX("1");
-            ajaxPage.SetY(2);
-            ajaxPage.ClickSumButton();
-            string result = ajaxPage.GetResultText();
-            Assert.That(result, Is.EqualTo(expectedText));
+            LoginFeature.Login(TestDataUsers.GetDefaultUser());
+            Logger.Info("Assert default user login");
+            homePage.OpenAjaxPage();
+            ajaxFeatures.ElementsSetUp(1, 2);
+            
+            string actualText = ajaxPage.GetResultText();
+            Assert.That(actualText, Is.EqualTo(expectedText));
         }
 
         [Test]
         public void InvalidCalculation()
         {
-            loginFeature.Login(TestDataUsers.GetDefaultUser());
-            Logger.Info("Assert _testDataUsers login");
-            ajaxPage.OpenAjaxPage();
-            ajaxPage.SetX(1);
-            ajaxPage.SetY("a");
-            ajaxPage.ClickSumButton();
-            ajaxPage.GetResultText();
-            string resultText = "Result is: Incorrect data"; 
-            Assert.That(ajaxPage.GetResultText().Equals(resultText));
+            string expectedText = "Result is: Incorrect data";
+            LoginFeature.Login(TestDataUsers.GetDefaultUser());
+            Logger.Info("Assert default user login");
+            homePage.OpenAjaxPage();
+            ajaxFeatures.ElementsSetUp(1, "a");
+            
+            string actualText = ajaxPage.GetResultText();
+            Assert.That(actualText.Equals(expectedText));
         }
     }
 }
