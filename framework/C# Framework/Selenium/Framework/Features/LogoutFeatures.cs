@@ -17,11 +17,10 @@ namespace Selenium.Framework.Features
             Driver = driver;
             LoginPage = new LoginPage(Driver);
         }
-        string baseURL = SiteNavigator.baseURL;
         
         public void OpenNewBrowserTab()
         {
-            ((IJavaScriptExecutor)Driver).ExecuteScript("window.open(arguments[0], '_blank');", baseURL);
+            ((IJavaScriptExecutor)Driver).ExecuteScript("window.open(arguments[0], '_blank');", Settings.GetBaseUrl());
             Driver.SwitchTo().Window(Driver.WindowHandles.Last());
         }
 

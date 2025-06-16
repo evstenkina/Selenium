@@ -15,9 +15,9 @@ namespace Selenium.Pages
 
         public string GetFlashMessage() => FlashMessage.Text;
 
-        public Header OnHeader()
+        public HeaderPage OnHeader()
         {
-            return new Header(Driver);
+            return new HeaderPage(Driver);
         }
     }
 }

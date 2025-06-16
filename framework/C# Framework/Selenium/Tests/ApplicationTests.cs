@@ -7,6 +7,8 @@ using Selenium.Pages;
 
 namespace Selenium.Tests
 {
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class ApplicationTests : BaseTest
     {
         private LoginFeature LoginFeature;
@@ -29,18 +31,18 @@ namespace Selenium.Tests
             ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithoutImage();
             ApplicationPage.OpenCreatedAppPage();
-            
+
             var downloadOption = ApplicationPage.Download;
             Assert.That(downloadOption.Enabled);
         }
-        
+
         [Test]
         public void CreateAppWithImage()
         {
             ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithImage();
             ApplicationPage.OpenCreatedAppPage();
-            
+
             var downloadOption = ApplicationPage.Download;
             Assert.That(downloadOption.Enabled);
         }
@@ -51,11 +53,11 @@ namespace Selenium.Tests
             string expectedText = "Application edited";
             ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithoutImage();
-            
+
             ApplicationPage.OpenCreatedAppPage();
             ApplicationPage.EditApp();
             ApplicationFeatures.UpdateApp();
-            
+
             string actualText = ApplicationPage.AppUpdatedConfirmation();
             Assert.That(actualText.Equals(expectedText));
         }
@@ -67,16 +69,16 @@ namespace Selenium.Tests
             ApplicationFeatures.AddAppWithoutImage();
             ApplicationPage.OpenCreatedAppPage();
             ApplicationPage.DeleteApp();
-            
+
             Driver.SwitchTo().Alert().Accept();
             var extectedText = ApplicationPage.DeletedAppConfirm;
             Assert.That(extectedText.Displayed);
-            
+
             HomePage.OpenMyApplicationPage();
 
             Assert.That(ApplicationFeatures.SearchForDeletedApp(), Is.True);
         }
-        
+
 
         [Test]
         public void PopularApps()
@@ -85,12 +87,14 @@ namespace Selenium.Tests
             ApplicationFeatures.LoginAndOpenMyApp();
             ApplicationFeatures.AddAppWithoutImage();
             ApplicationPage.OpenCreatedAppPage();
-            
+
             int downloadNumber = new Random().Next(1, 7);
             ApplicationFeatures.DownloadAppMultipleTimes(downloadNumber);
-            
+
             string actualTitle = ApplicationPage.PopularAppTitle();
             Assert.That(actualTitle, Is.EqualTo(expectedTitle));
+            
+            //ApplicationFeatures.FindApplicationFromTheList(expectedTitle);
         }
 
         [Test]
@@ -100,14 +104,13 @@ namespace Selenium.Tests
             SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert default user login");
-            
+
             ApplicationPage.OpenApplicationPage();
             ApplicationPage.DownloadApp();
             ApplicationFeatures.GetJSONText();
-            
+
             string actualTitle = ApplicationFeatures.GetApplicationJSONData().title;
             Assert.That(actualTitle, Is.EqualTo(expectedTitle));
         }
     }
-    
 }

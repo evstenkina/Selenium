@@ -13,12 +13,14 @@ namespace Selenium.Framework.Features
     public class RegistrationFeatures
     {
         private RegistrationPage RegistrationPage;
-        private Header Header;
+        private HeaderPage HeaderPage;
+        private WaitHelper WaitHelper;
 
         public RegistrationFeatures(IWebDriver driver)
         {
             RegistrationPage = new RegistrationPage(driver);
-            Header = new Header(driver);
+            HeaderPage = new HeaderPage(driver);
+            WaitHelper = new WaitHelper(driver);
         }
 
         public List<User> ReadUsersFromCsv(string a)
@@ -29,13 +31,13 @@ namespace Selenium.Framework.Features
             return csv.GetRecords<User>().ToList();
         }
 
-        public void RegisterUsers(List<User> users)
+        public void RegisterUsersAndValidate(List<User> users)
         {
             foreach (var user in users)
             {
                 var headerText = RegisterUser(user);
                 Assert.That(headerText.Equals($"Welcome {user.FirstName} {user.LastName}"));
-                Header.Logout();
+                HeaderPage.Logout();
             }
         }
 
@@ -60,6 +62,14 @@ namespace Selenium.Framework.Features
             RegistrationPage.RegisterButton.Click();
 
             return RegistrationPage.OnHeader().GetWelcomeText;
+        }
+        
+        By uploadOption = By.XPath("//a[text()='My applications']");
+        
+        public bool SearchForUploadOption()
+        { 
+            WaitHelper.WaitForElementNotExist(uploadOption);
+            return true;
         }
     }
 }

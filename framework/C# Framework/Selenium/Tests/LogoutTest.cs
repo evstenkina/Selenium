@@ -10,7 +10,7 @@ namespace Selenium.Tests
     {
         private LoginFeature LoginFeature;
         private ApplicationPage ApplicationPage;
-        private Header Header;
+        private HeaderPage HeaderPage;
         private LogoutFeatures LogoutFeatures;
         
 
@@ -19,7 +19,7 @@ namespace Selenium.Tests
         {
             LoginFeature = new LoginFeature(Driver);
             ApplicationPage = new ApplicationPage(Driver);
-            Header = new Header(Driver);
+            HeaderPage = new HeaderPage(Driver);
             LogoutFeatures = new LogoutFeatures(Driver);
             SiteNavigator.NavigateToLoginPage(Driver);
         }
@@ -30,16 +30,11 @@ namespace Selenium.Tests
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert user login");
             LogoutFeatures.OpenNewBrowserTab();
-            
-            Header.Logout();
-           
+            HeaderPage.Logout();
             LogoutFeatures.NavigateToFirstTab();
-            
             ApplicationPage.OpenApplicationPage();
+            
             Assert.That(LogoutFeatures.IsLoginButtDisp(), Is.True);
         }
-
-       
-       
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -85,6 +87,14 @@ namespace Selenium.Framework.Features
                 ApplicationPage.Download.Click();
                 Driver.Navigate().Back();
             }  
+        }
+        
+        public List<IWebElement> ApplicationList => Driver.FindElements(By.XPath("//div[@class='name']")).ToList();
+        public bool FindApplicationFromTheList(string expectedTitle)
+        {
+            var a = ApplicationList.Where(x => x.Text == expectedTitle).FirstOrDefault();
+            
+            return a != null;
         }
     }
 }

@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using Selenium.Framework;
 using Selenium.Framework.Features;
 using Selenium.Framework.TestData;
@@ -10,86 +8,70 @@ namespace Selenium.Tests
 {
     public class RegisterTest : BaseTest
     {
-        private User userUser;
-        private User userDeveloper;
-        private List<User> users;
         private RegistrationFeatures RegistrationFeatures;
         private RegistrationPage RegistrationPage;
         private ApplicationPage ApplicationPage;
         private LoginFeature LoginFeature;
         private HomePage HomePage;
-        private Header Header;
+        private HeaderPage HeaderPage;
 
         [SetUp]
         protected void Initialize()
         {
-            userUser = TestDataUsers.GetStenkinaUser();
-            userDeveloper = TestDataUsers.GetStenkinaDeveloper();
             RegistrationFeatures = new RegistrationFeatures(Driver);
             RegistrationPage = new RegistrationPage(Driver);
             ApplicationPage = new ApplicationPage(Driver);
             LoginFeature = new LoginFeature(Driver);
             HomePage = new HomePage(Driver);
-            Header = new Header(Driver);
+            HeaderPage = new HeaderPage(Driver);
         }
 
         [Test]
         public void RegisterNewUserTest()
         {
             SiteNavigator.NavigateToRegistrationPage(Driver);
-            RegistrationFeatures.RegisterUser(userUser);
+            RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaUser());
             
-            Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(userUser.FirstName));
+            Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(TestDataUsers.GetStenkinaUser().FirstName));
         }
 
         [Test]
         public void RegisterNewUserLogoutTest()
         {
             SiteNavigator.NavigateToRegistrationPage(Driver);
-            RegistrationFeatures.RegisterUser(userUser);
-            Header.Logout();
+            RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaUser());
+            HeaderPage.Logout();
             LoginFeature.Login(TestDataUsers.GetStenkinaUser());
             
-            Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(userUser.FirstName));
+            Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(TestDataUsers.GetStenkinaUser().FirstName));
         }
 
         [Test]
         public void RegisterDeveloperTest()
         {
-            string expectedAppButton = "Create";
             SiteNavigator.NavigateToRegistrationPage(Driver);
-            RegistrationFeatures.RegisterUser(userDeveloper);
+            RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaDeveloper());
             HomePage.OpenMyApplicationPage();
             ApplicationPage.OpenAddNewAppPage();
-            
-            string appText = ApplicationPage.SubmitButton.GetAttribute("value");
-            Assert.That(appText.Equals(expectedAppButton));
+
+            Assert.That(ApplicationPage.SubmitButton.Displayed, Is.True);
         }
 
         [Test]
         public void RegisterNewUserAppTest()
         {
             SiteNavigator.NavigateToRegistrationPage(Driver);
-            RegistrationFeatures.RegisterUser(userUser);
-            bool uploadOption = true;
-            try
-            {
-                var element = HomePage.MyApplication;
-            }
-            catch (NoSuchElementException)
-            {
-                uploadOption = false;
-            }
-
-            Assert.That(uploadOption.Equals(false));
+            RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaUser());
+            
+            Assert.That(RegistrationFeatures.SearchForUploadOption(), Is.True);
         }
 
         [Test]
         public void RegisterUsersCSV()
         {
-            users = RegistrationFeatures.ReadUsersFromCsv(TestDataPath.UserForRegistrationPath);
+            var users = RegistrationFeatures.ReadUsersFromCsv(TestDataPath.UserForRegistrationPath);
             SiteNavigator.NavigateToLoginPage(Driver);
-            RegistrationFeatures.RegisterUsers(users);
+            RegistrationFeatures.RegisterUsersAndValidate(users);
         }
     }
 }

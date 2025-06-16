@@ -31,7 +31,7 @@ namespace Selenium.Tests
             Logger.Info("Assert default user login");
             homePage.OpenAjaxPage();
             ajaxFeatures.ElementsSetUp(1, 2);
-            
+
             string actualText = ajaxPage.GetResultText();
             Assert.That(actualText, Is.EqualTo(expectedText));
         }
@@ -44,7 +44,7 @@ namespace Selenium.Tests
             Logger.Info("Assert default user login");
             homePage.OpenAjaxPage();
             ajaxFeatures.ElementsSetUp(1, "a");
-            
+
             string actualText = ajaxPage.GetResultText();
             Assert.That(actualText.Equals(expectedText));
         }

@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using OpenQA.Selenium;
-using Selenium.Framework.Features;
 
 namespace Selenium.Pages
 {

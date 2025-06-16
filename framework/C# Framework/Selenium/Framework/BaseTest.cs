@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -8,7 +9,8 @@ namespace Selenium.Framework
 {
     public class BaseTest
     {
-        protected IWebDriver Driver;
+        private static ThreadLocal<IWebDriver> threadDriver = new ThreadLocal<IWebDriver>();
+        protected IWebDriver Driver => threadDriver.Value;
         protected ILog Logger;
         
         [SetUp]
@@ -16,20 +18,17 @@ namespace Selenium.Framework
         {
             Logger = LogManager.GetLogger(GetType());
             Logger.Info("log4net initialized");
-            Driver = Settings.GetDriver();
+            threadDriver.Value = Settings.GetDriver();
             Driver.Manage().Window.Maximize();
             Logger.Info("Test started");
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             Logger.Info("10 seconds wait is setup");
         }
 
         [TearDown]
         public virtual void Cleanup()
         {
-            if (TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed)
-            {
-                ScreenshotHelper.TakeScreenshot(Driver);
-            }
+            ScreenshotHelper.TakeScreenshot(Driver);
             Driver.Quit();
         }
     } 

@@ -6,14 +6,11 @@ namespace Selenium.Framework
 {
     public class SiteNavigator
     {
-        public static string baseURL = ConfigurationManager.AppSettings["baseURL"];
-        public static string authURL = ConfigurationManager.AppSettings["authURL"];
-       
         public static LoginPage NavigateToLoginPage(IWebDriver driver, bool isBaseURL = true)
         {
             string URL = isBaseURL
-                ? baseURL
-                : authURL;
+                ? Settings.GetBaseUrl()
+                : Settings.GetAuthUrl();
 
             driver.Navigate().GoToUrl(URL);
 

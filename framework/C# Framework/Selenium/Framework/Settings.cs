@@ -14,19 +14,23 @@ namespace Selenium.Framework
     {
         public static string GetBaseUrl()
         {
-            return ConfigurationManager.AppSettings["http://selenium-courses.ipa.dataart.net:8080/"];
+            return ConfigurationManager.AppSettings["baseURL"];
         }
-
+        public static string GetAuthUrl()
+        {
+            return ConfigurationManager.AppSettings["authURL"];;
+        }
         
-        //TODO сделать переменную для PATH
         public static IWebDriver GetDriver()
         {
+            var driverPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Drivers");
+            
             switch (GetBrowserType())
             {
                 case "chrome":
-                    return new ChromeDriver(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Drivers"));
+                    return new ChromeDriver(driverPath);
                 case "firefox":
-                    return new FirefoxDriver(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Drivers"));
+                    return new FirefoxDriver(driverPath);
                 default:
                     throw new Exception("Unknown browser type!");
             }
