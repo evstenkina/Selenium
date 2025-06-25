@@ -1,0 +1,78 @@
+Index: .idea/.idea.Selenium/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"f72f42f7-387c-49dd-916a-43604afddae4\" name=\"Changes\" comment=\"small update\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ChangesViewManager\">\n    <option name=\"groupingKeys\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/Selenium\" />\n  </component>\n  <component name=\"MetaFilesCheckinStateConfiguration\" checkMetaFiles=\"false\" />\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"git-widget-placeholder\": \"Develop\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\"\n  }\n}]]></component>\n  <component name=\"TaskManager\">\n    <servers />\n  </component>\n  <component name=\"UnityCheckinConfiguration\" checkUnsavedScenes=\"false\" />\n  <component name=\"UnityProjectConfiguration\" hasMinimizedUI=\"false\" />\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"Develop\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <breakpoint enabled=\"true\" type=\"DotNet_Exception_Breakpoints\">\n          <properties exception=\"System.OperationCanceledException\" breakIfHandledByOtherCode=\"false\" displayValue=\"System.OperationCanceledException\" />\n          <option name=\"timeStamp\" value=\"3\" />\n        </breakpoint>\n        <breakpoint enabled=\"true\" type=\"DotNet_Exception_Breakpoints\">\n          <properties exception=\"System.Threading.Tasks.TaskCanceledException\" breakIfHandledByOtherCode=\"false\" displayValue=\"System.Threading.Tasks.TaskCanceledException\" />\n          <option name=\"timeStamp\" value=\"4\" />\n        </breakpoint>\n        <breakpoint enabled=\"true\" type=\"DotNet_Exception_Breakpoints\">\n          <properties exception=\"System.Threading.ThreadAbortException\" breakIfHandledByOtherCode=\"false\" displayValue=\"System.Threading.ThreadAbortException\" />\n          <option name=\"timeStamp\" value=\"5\" />\n        </breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.Selenium/.idea/workspace.xml b/.idea/.idea.Selenium/.idea/workspace.xml
+--- a/.idea/.idea.Selenium/.idea/workspace.xml	(revision eb1b4cf1a49db1cccfd8da5b75f55342b649d940)
++++ b/.idea/.idea.Selenium/.idea/workspace.xml	(date 1750864916675)
+@@ -4,7 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="f72f42f7-387c-49dd-916a-43604afddae4" name="Changes" comment="small update" />
++    <list default="true" id="f72f42f7-387c-49dd-916a-43604afddae4" name="Changes" comment="check">
++      <change beforePath="$PROJECT_DIR$/Selenium/Framework/Features/LogoutFeatures.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Selenium/Framework/Features/LogoutFeatures.cs" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -14,16 +16,40 @@
+     <option name="groupingKeys" />
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$/../.." value="Develop" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Selenium" />
++    <option name="RESET_MODE" value="HARD" />
++    <option name="ROOT_SYNC" value="SYNC" />
++  </component>
++  <component name="HighlightingSettingsPerFile">
++    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Pages/AJAXPage.cs" root0="SKIP_HIGHLIGHTING" />
++    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Tests/LoginTests.cs" root0="SKIP_HIGHLIGHTING" />
+   </component>
+   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "git-widget-placeholder": "Develop",
+-    "node.js.selected.package.tslint": "(autodetect)"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;git-widget-placeholder&quot;: &quot;Develop&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="TaskManager">
++    <task id="LOCAL-00001" summary="check">
++      <option name="closed" value="true" />
++      <created>1750861261793</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1750861261793</updated>
++    </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
+@@ -50,6 +76,10 @@
+         </entry>
+       </map>
+     </option>
++  </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="check" />
++    <option name="LAST_COMMIT_MESSAGE" value="check" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
