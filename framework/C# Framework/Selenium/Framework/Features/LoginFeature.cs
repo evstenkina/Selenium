@@ -22,7 +22,7 @@ namespace Selenium.Framework.Features
             if (isBaseURL)
             {
                 LoginPage.UsernameBox.SendKeys(user.Login);
-                Logger.Info("Username1 is added");
+                Logger.Info("Username is added");
                 LoginPage.PasswordBox.SendKeys(user.Password);
                 Logger.Info("Password is added");
                 LoginPage.LoginButton.Click();
