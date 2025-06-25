@@ -1,20 +1,18 @@
 using NUnit.Framework;
 using Selenium.Framework;
 using Selenium.Framework.Features;
+using Selenium.Framework.Helpers;
 using Selenium.Framework.TestData;
-using Selenium.Pages;
 
 namespace Selenium.Tests
 {
     public class LoginTests : BaseTest
     {
-        private LoginPage LoginPage;
         private LoginFeature LoginFeature;
 
         [SetUp]
         protected void Initialize()
         {
-            LoginPage = new LoginPage(Driver);
             LoginFeature = new LoginFeature(Driver);
         }
 
@@ -29,17 +27,15 @@ namespace Selenium.Tests
             LoginFeature.Login(user, isBaseURL);
             Logger.Info("Assert user login");
             
-            Assert.That(LoginPage.OnHeader().GetWelcomeText.Contains(user.FirstName));
+            Assert.That(LoginFeature.IsWelcomeTextDisplayed(), Is.True);
         }
 
         [Test]
         public void InvalidLoginTest()
         {
-            string expectedResultText = "invalid username or password";
-            SiteNavigator.NavigateToLoginPage(Driver);
             LoginFeature.Login(TestDataUsers.GetInvalidUser());
             
-            Assert.That(LoginPage.GetFlashMessage().Contains(expectedResultText));
+            Assert.That(LoginFeature.IsInvalidUserMessageDisplayed(), Is.True);
         }
     }
 }

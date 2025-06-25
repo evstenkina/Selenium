@@ -2,7 +2,7 @@ using System.Configuration;
 using OpenQA.Selenium;
 using Selenium.Pages;
 
-namespace Selenium.Framework
+namespace Selenium.Framework.Helpers
 {
     public class SiteNavigator
     {

@@ -7,7 +7,7 @@ namespace Selenium.Pages
         public RegistrationPage(IWebDriver driver) : base(driver)
         {
         }
-
+        
         public IWebElement RegisterNewUserButton => Driver.FindElement(By.XPath("//*[@href='../register']"));
 
         public IWebElement NameBox => Driver.FindElement(By.CssSelector("input[name='name']"));
@@ -26,5 +26,6 @@ namespace Selenium.Pages
 
         public IWebElement RegisterButton => Driver.FindElement(By.XPath("//input[@value='Register']"));
         
+        public static By uploadOption = By.XPath("//a[text()='My applications']"); //todo to the page
     }
 }

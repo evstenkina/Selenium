@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using Selenium.Framework.Models;
 using Selenium.Framework.TestData;
 using Selenium.Pages;
+using log4net;
+using Selenium.Framework.Helpers;
 
 namespace Selenium.Framework.Features
 {
@@ -14,87 +12,132 @@ namespace Selenium.Framework.Features
     {
         private ApplicationPage ApplicationPage;
         private WaitHelper WaitHelper;
-        private HomePage HomePage;
         private LoginFeature LoginFeature;
+        private HeaderFeatures HeaderFeatures;
         public static IWebDriver Driver;
+        protected ILog Logger;
 
         public ApplicationFeatures(IWebDriver driver)
         {
             ApplicationPage = new ApplicationPage(driver);
             WaitHelper = new WaitHelper(driver);
-            HomePage = new HomePage(driver);
             LoginFeature = new LoginFeature(driver);
+            HeaderFeatures = new HeaderFeatures(driver);
             Driver = driver;
         }
-
-        public void AddAppWithoutImage()
-        {
-            ApplicationPage.AddNewApp.Click();
-            ApplicationPage.Title.SendKeys("This is title for new application");
-            ApplicationPage.Description.SendKeys("This is description for new application");
-            ApplicationPage.SubmitButton.Click();
-        }
-
+        
         public void UpdateApp()
         {
             ApplicationPage.Description.SendKeys("This is update description for new application");
             ApplicationPage.Update.Click();
+            Logger.Info("Application is updated");
         }
 
-        public void AddAppWithImage()
+        public void OpenAddNewAppPage()
+        {
+            ApplicationPage.AddNewApp.Click();
+            Logger.Info("New application is opened");
+        }
+        
+        public void LoginAndOpenMyApp()
+        {
+            LoginFeature.Login(TestDataUsers.GetDefaultUser());
+            HeaderFeatures.OpenMyApplicationPage();
+            Logger.Info("My application page is opened");
+        }
+        
+        public void AddApplication(bool withImage = true)
         {
             ApplicationPage.AddNewApp.Click();
             ApplicationPage.Title.SendKeys("This is title for new application");
+            Logger.Info("Title is added");
             ApplicationPage.Description.SendKeys("This is description for new application");
-            ApplicationPage.Icon.SendKeys(TestDataPath.IconPath);
-            ApplicationPage.Image.SendKeys(TestDataPath.ImagePath);
+            Logger.Info("Description is added");
+            if (withImage)
+            {
+                ApplicationPage.Icon.SendKeys(TestDataPath.IconPath);
+                ApplicationPage.Image.SendKeys(TestDataPath.ImagePath);
+                Logger.Info("Images are added");
+            }
             ApplicationPage.SubmitButton.Click();
+            Logger.Info("New application  is created");
         }
 
-        public string GetJSONText()
+        public void CreateApp(bool withImage = false)
         {
-            return ApplicationPage.JSONText.Text;
+            LoginAndOpenMyApp();
+            AddApplication(withImage);
+            Logger.Info("New application  is created");
         }
 
+        public void GetJSONText()
+        {
+            ApplicationPage.JSONToText();
+        }
+            
         public JSONData GetApplicationJSONData()
         {
-            string json = GetJSONText();
+            string json = ApplicationPage.JSONToText();
 
             return JsonConvert.DeserializeObject<JSONData>(json);
         }
         
-        By searchForApp = By.XPath("//a[text()='Details' and @href='/app?title=This is title for new application']");
-       
-        public bool SearchForDeletedApp()
+        public bool CheckThatDeletedAppIsNotDisplayed()
         { 
-            WaitHelper.WaitForElementNotExist(searchForApp);
+            WaitHelper.WaitForElementNotExist(ApplicationPage.searchForApp);
+            Logger.Info("Deleted application is not found");
             return true;
         }
-
-        public void LoginAndOpenMyApp()
-        {
-            SiteNavigator.NavigateToLoginPage(Driver);
-            LoginFeature.Login(TestDataUsers.GetDefaultUser());
-            //Logger.Info("Assert default user login");
-            HomePage.OpenMyApplicationPage();
-        }
-
-       
+        
         public void DownloadAppMultipleTimes(int count)
         {
             for (int i = 0; i < count; i++)
             {
                 ApplicationPage.Download.Click();
+                Logger.Info("Application is downloaded");
                 Driver.Navigate().Back();
             }  
         }
         
-        public List<IWebElement> ApplicationList => Driver.FindElements(By.XPath("//div[@class='name']")).ToList();
+        /*public List<IWebElement> ApplicationList => Driver.FindElements(By.XPath("//div[@class='name']")).ToList();
         public bool FindApplicationFromTheList(string expectedTitle)
         {
             var a = ApplicationList.Where(x => x.Text == expectedTitle).FirstOrDefault();
             
             return a != null;
+        }*/
+
+        public void EditAppFeature()
+        {
+            ApplicationPage.Edit.Click();
+            Logger.Info("Application edit mode is opened");
+        }
+
+        public void DeleteAppFeature()
+        {
+            ApplicationPage.Delete.Click();
+            Logger.Info("Application is deleted");
+        }
+
+        public void DownloadAppFeature()
+        {
+            ApplicationPage.Download.Click();
+            Logger.Info("Application is downloaded");
+        }
+
+        public bool ConfirmDeletedApp()
+        {
+            return ApplicationPage.DeletedAppConfirm.Displayed;
+        }
+        
+        public bool AppUpdatedConfirmationTextTitle() 
+        {
+            return ApplicationPage.AppUpdated.Displayed;
+        }
+
+        public bool IsDownloadedEnabled()
+        {
+            return ApplicationPage.Download.Enabled;
         }
     }
 }

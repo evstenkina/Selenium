@@ -1,9 +1,9 @@
 using System;
-using Selenium.Framework.TestData;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using Selenium.Framework.Models;
 using Selenium.Pages;
+using log4net;
 
 namespace Selenium.Framework.Features
 {
@@ -11,34 +11,23 @@ namespace Selenium.Framework.Features
     {
         private JSPage JSPage;
         private IWebDriver Driver;
+        protected ILog Logger;
 
         public JSFeatures(IWebDriver driver)
         {
             Driver = driver;
             JSPage = new JSPage(driver);
         }
-
+        
         public void Execute()
         {
             GetCoordinates();
-            SetTopInputField();
-            SetLeftInputField();
-            ClickProcessButton();
-        }
-
-        private void ClickProcessButton()
-        {
-            JSPage.ClickProcessButton();
-        }
-
-        private void SetTopInputField()
-        {
-            JSPage.TopInputFieldSendKeys(GetCoordinates().Top.ToString());
-        }
-        
-        private void SetLeftInputField()
-        {
-            JSPage.LeftInputFieldSendKeys(GetCoordinates().Left.ToString());
+            JSPage.TopInputField.SendKeys(GetCoordinates().Top.ToString());
+            Logger.Info("Top coordinate is set");
+            JSPage.LeftInputField.SendKeys(GetCoordinates().Left.ToString());
+            Logger.Info("Left coordinate is set");
+            JSPage.Process.Click();
+            Logger.Info("Result is procced");
         }
 
         private JSCoordinates.Coordinates GetCoordinates()

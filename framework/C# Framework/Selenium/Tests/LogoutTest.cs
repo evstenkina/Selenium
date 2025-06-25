@@ -1,26 +1,26 @@
 using NUnit.Framework;
 using Selenium.Framework;
 using Selenium.Framework.Features;
+using Selenium.Framework.Helpers;
 using Selenium.Framework.TestData;
-using Selenium.Pages;
 
 namespace Selenium.Tests
 {
     public class LogoutTests : BaseTest
     {
         private LoginFeature LoginFeature;
-        private ApplicationPage ApplicationPage;
-        private HeaderPage HeaderPage;
         private LogoutFeatures LogoutFeatures;
+        private HomeFeatures HomeFeatures;
+        private HeaderFeatures HeaderFeatures;
         
 
         [SetUp]
         protected void Initialize()
         {
             LoginFeature = new LoginFeature(Driver);
-            ApplicationPage = new ApplicationPage(Driver);
-            HeaderPage = new HeaderPage(Driver);
             LogoutFeatures = new LogoutFeatures(Driver);
+            HomeFeatures = new HomeFeatures(Driver);
+            HeaderFeatures = new HeaderFeatures(Driver);
             SiteNavigator.NavigateToLoginPage(Driver);
         }
 
@@ -30,9 +30,9 @@ namespace Selenium.Tests
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert user login");
             LogoutFeatures.OpenNewBrowserTab();
-            HeaderPage.Logout();
+            HeaderFeatures.Logout();
             LogoutFeatures.NavigateToFirstTab();
-            ApplicationPage.OpenApplicationPage();
+            HomeFeatures.OpenApplicationPage();
             
             Assert.That(LogoutFeatures.IsLoginButtDisp(), Is.True);
         }

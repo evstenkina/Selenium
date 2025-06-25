@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 using Selenium.Pages;
+using log4net;
 
 namespace Selenium.Framework.Features
 {
@@ -9,6 +10,7 @@ namespace Selenium.Framework.Features
     {
         private IWebDriver Driver;
         private LoginPage LoginPage;
+        protected ILog Logger;
         
         public bool IsLoginButtDisp() => LoginPage.LoginButton.Displayed;
         
@@ -22,12 +24,15 @@ namespace Selenium.Framework.Features
         {
             ((IJavaScriptExecutor)Driver).ExecuteScript("window.open(arguments[0], '_blank');", Settings.GetBaseUrl());
             Driver.SwitchTo().Window(Driver.WindowHandles.Last());
+            Logger.Info("New browser tab is opened");
         }
 
         public void NavigateToFirstTab()
         {
             List<string> tabs = Driver.WindowHandles.ToList();
             Driver.SwitchTo().Window(tabs[0]);
+            Logger.Info("First browser tab is opened");
         }
+        
     }
 }

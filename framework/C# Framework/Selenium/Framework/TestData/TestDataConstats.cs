@@ -9,7 +9,7 @@ namespace Selenium.Framework
 
         public const string TestDataPath = "Framework/TestData";
         public const string UsersForRegistrationTestData = "RegisterUsers.csv";
-        public const string Screenshots = "Framework/TestData/Screenshots";
+        public const string Screenshots = "Screenshots";
         public const string Image = "Image.jpg";
         public const string Icon = "Icon.jpeg";
     }

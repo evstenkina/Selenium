@@ -1,43 +1,29 @@
 using OpenQA.Selenium;
 using Selenium.Pages;
+using log4net;
 
 namespace Selenium.Framework.Features
 {
     public class AJAXFeatures
     {
-        private AJAXPage ajaxPage;
+        private AJAXPage AJAXPage;
+        protected ILog Logger;
 
         public AJAXFeatures(IWebDriver driver)
         {
-            ajaxPage = new AJAXPage(driver);
-        }
-
-        public string ElementsSetUp(dynamic X, dynamic Y)
-        {
-            ajaxPage.SetX(X);
-            ajaxPage.SetY(Y);
-            ajaxPage.ClickSumButton();
-            
-            return ajaxPage.GetResultText();
+            AJAXPage = new AJAXPage(driver);
         }
         
-        /*public string ElementsSetUp(int X, int Y)
+        public string ElementsSetUp(dynamic X, dynamic Y)
         {
-            ajaxPage.SetX(X);
-            ajaxPage.SetY(Y);
-            ajaxPage.ClickSumButton();
+            AJAXPage.X.SendKeys(X.ToString());
+            Logger.Info("X is set");
+            AJAXPage.Y.SendKeys(Y.ToString());
+            Logger.Info("Y is set");
+            AJAXPage.SumButton.Click();
+            Logger.Info("Result is displayed");
             
-            return ajaxPage.GetResultText();
+            return AJAXPage.GetResultText();
         }
-            
-        public string ElementsSetUp(int X, string Y)
-        {
-            ajaxPage.SetX(X);
-            ajaxPage.SetY(Y);
-            ajaxPage.ClickSumButton();
-            
-            return ajaxPage.GetResultText();
-        }*/
-    
     }
 }

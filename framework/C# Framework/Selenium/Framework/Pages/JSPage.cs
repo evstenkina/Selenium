@@ -13,7 +13,7 @@ namespace Selenium.Pages
         public IWebElement LeftInputField => Driver.FindElement(By.XPath("//input[@id='left']"));
         public IWebElement Process => Driver.FindElement(By.XPath("//button[@id='process']"));
 
-        public void ClickProcessButton()
+        /*public void ClickProcessButton()
         {
             Process.Click();
         }
@@ -24,6 +24,6 @@ namespace Selenium.Pages
         public void LeftInputFieldSendKeys(string text)
         {
             LeftInputField.SendKeys(text);
-        }
+        }*/
     }
 }

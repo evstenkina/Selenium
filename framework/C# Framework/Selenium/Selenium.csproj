@@ -171,30 +171,33 @@
     <Compile Include="Framework\BaseTest.cs" />
     <Compile Include="Framework\Features\AJAXFeatures.cs" />
     <Compile Include="Framework\Features\ApplicationFeatures.cs" />
+    <Compile Include="Framework\Features\HeaderFeatures.cs" />
+    <Compile Include="Framework\Features\HomeFeatures.cs" />
     <Compile Include="Framework\Features\JSFeatures.cs" />
     <Compile Include="Framework\Features\LoginFeature.cs" />
     <Compile Include="Framework\Features\LogoutFeatures.cs" />
     <Compile Include="Framework\Features\RegistrationFeatures.cs" />
-    <Compile Include="Framework\Features\ScreenshotHelper.cs" />
-    <Compile Include="Framework\Features\WaitHelper.cs" />
+    <Compile Include="Framework\Helpers\CSVReaderHelper.cs" />
+    <Compile Include="Framework\Helpers\ScreenshotHelper.cs" />
+    <Compile Include="Framework\Helpers\SiteNavigator.cs" />
+    <Compile Include="Framework\Helpers\WaitHelper.cs" />
     <Compile Include="Framework\Models\JSCoordinates.cs" />
     <Compile Include="Framework\Models\JSONData.cs" />
     <Compile Include="Framework\Models\User.cs" />
+    <Compile Include="Framework\Pages\AJAXPage.cs" />
+    <Compile Include="Framework\Pages\ApplicationPage.cs" />
+    <Compile Include="Framework\Pages\BasePage.cs" />
+    <Compile Include="Framework\Pages\HeaderPage.cs" />
+    <Compile Include="Framework\Pages\HomePage.cs" />
+    <Compile Include="Framework\Pages\JSPage.cs" />
+    <Compile Include="Framework\Pages\LoginPage.cs" />
+    <Compile Include="Framework\Pages\RegistrationPage.cs" />
     <Compile Include="Framework\Settings.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Framework\SiteNavigator.cs" />
     <Compile Include="Framework\TestData\TestDataConstats.cs" />
     <Compile Include="Framework\TestData\TestDataPath.cs" />
     <Compile Include="Framework\TestData\TestDataUsers.cs" />
-    <Compile Include="Pages\AJAXPage.cs" />
-    <Compile Include="Pages\ApplicationPage.cs" />
-    <Compile Include="Pages\BasePage.cs" />
-    <Compile Include="Pages\HeaderPage.cs" />
-    <Compile Include="Pages\HomePage.cs" />
-    <Compile Include="Pages\JSPage.cs" />
-    <Compile Include="Pages\LoginPage.cs" />
-    <Compile Include="Pages\RegistrationPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AJAXTest.cs" />
     <Compile Include="Tests\ApplicationTests.cs" />
@@ -217,13 +220,13 @@
     <Content Include="Drivers\geckodriver 3">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Framework\TestData\Icon.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Framework\TestData\Image.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Framework\TestData\RegisterUsers.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Icon.jpeg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Image.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

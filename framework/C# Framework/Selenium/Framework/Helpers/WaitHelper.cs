@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 
-namespace Selenium.Framework.Features
+namespace Selenium.Framework.Helpers
 {
     public class WaitHelper
     {

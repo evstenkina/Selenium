@@ -18,7 +18,7 @@ namespace Selenium.Pages
         public IWebElement MyApplication => Driver.FindElement(By.XPath("//a[@href='/my' and normalize-space(text())='My applications']"));
         public IWebElement JSTestPage => Driver.FindElement(By.XPath("//a[text()='JS test page']"));
         
-        public void OpenAjaxPage()
+        /*public void OpenAjaxPage()
         {
             AjaxPage.Click();
         }
@@ -38,6 +38,6 @@ namespace Selenium.Pages
             LogOutLink.Click();
 
             return new LoginPage(Driver);
-        }
+        }*/
     }
 }

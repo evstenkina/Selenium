@@ -12,7 +12,7 @@ namespace Selenium.Pages
         public IWebElement PasswordBox => Driver.FindElement(By.Id("j_password"));
         public IWebElement LoginButton => Driver.FindElement(By.XPath("//input[@value='Login']"));
 
-        public void ClickLoginButton()
+        /*public void ClickLoginButton()
         {
             LoginButton.Click();
         }
@@ -25,6 +25,6 @@ namespace Selenium.Pages
         public void EnterPassword(string password)
         {
             PasswordBox.SendKeys(password);
-        }
+        }*/
     }
 }

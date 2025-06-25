@@ -1,43 +1,36 @@
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using CsvHelper;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.Framework.TestData;
 using Selenium.Pages;
+using log4net;
+using Selenium.Framework.Helpers;
 
 namespace Selenium.Framework.Features
 {
     public class RegistrationFeatures
     {
         private RegistrationPage RegistrationPage;
-        private HeaderPage HeaderPage;
         private WaitHelper WaitHelper;
+        private ApplicationPage ApplicationPage;
+        private HeaderFeatures HeaderFeatures;
+        protected ILog Logger;
 
         public RegistrationFeatures(IWebDriver driver)
         {
             RegistrationPage = new RegistrationPage(driver);
-            HeaderPage = new HeaderPage(driver);
             WaitHelper = new WaitHelper(driver);
+            ApplicationPage = new ApplicationPage(driver);
+            HeaderFeatures = new HeaderFeatures(driver);
         }
-
-        public List<User> ReadUsersFromCsv(string a)
-        {
-            var reader = new StreamReader(a);
-            var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-
-            return csv.GetRecords<User>().ToList();
-        }
-
+        
         public void RegisterUsersAndValidate(List<User> users)
         {
             foreach (var user in users)
             {
                 var headerText = RegisterUser(user);
                 Assert.That(headerText.Equals($"Welcome {user.FirstName} {user.LastName}"));
-                HeaderPage.Logout();
+                HeaderFeatures.Logout();
             }
         }
 
@@ -60,16 +53,26 @@ namespace Selenium.Framework.Features
             }
 
             RegistrationPage.RegisterButton.Click();
+            Logger.Info("User is registered and logged in");
 
             return RegistrationPage.OnHeader().GetWelcomeText;
         }
         
-        By uploadOption = By.XPath("//a[text()='My applications']");
-        
         public bool SearchForUploadOption()
-        { 
-            WaitHelper.WaitForElementNotExist(uploadOption);
+        {
+            WaitHelper.WaitForElementNotExist(RegistrationPage.uploadOption);
+            
             return true;
+        }
+
+        public bool IsSubmitButtonDisplayed()
+        {
+            return ApplicationPage.SubmitButton.Displayed;
+        }
+
+        public bool IsWelcomeTextDisplayed()
+        {
+            return RegistrationPage.OnHeader().GetWelcomeText.Contains(TestDataUsers.GetStenkinaUser().FirstName);
         }
     }
 }

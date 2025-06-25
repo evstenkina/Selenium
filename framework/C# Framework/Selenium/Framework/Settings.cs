@@ -12,6 +12,27 @@ namespace Selenium.Framework
 {
     public class Settings
     {
+        
+        public IWebDriver GetDriver()
+        {
+            var driverPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Drivers");
+            
+            switch (GetBrowserType())
+            {
+                case "chrome":
+                    var options = new ChromeOptions();
+                    options.AddArgument("--no-sandbox");
+                    options.AddArgument("--disable-gpu");
+                    options.AddArgument("--disable-dev-shm-usage");
+                    
+                    return new ChromeDriver(driverPath, options);
+                case "firefox":
+                    return new FirefoxDriver(driverPath);
+                default:
+                    throw new Exception("Unknown browser type!");
+            }
+        }
+        
         public static string GetBaseUrl()
         {
             return ConfigurationManager.AppSettings["baseURL"];
@@ -19,21 +40,6 @@ namespace Selenium.Framework
         public static string GetAuthUrl()
         {
             return ConfigurationManager.AppSettings["authURL"];;
-        }
-        
-        public static IWebDriver GetDriver()
-        {
-            var driverPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Drivers");
-            
-            switch (GetBrowserType())
-            {
-                case "chrome":
-                    return new ChromeDriver(driverPath);
-                case "firefox":
-                    return new FirefoxDriver(driverPath);
-                default:
-                    throw new Exception("Unknown browser type!");
-            }
         }
 
         public static string GetBrowserType()

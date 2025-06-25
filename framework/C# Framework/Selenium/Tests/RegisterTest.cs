@@ -1,66 +1,62 @@
 using NUnit.Framework;
 using Selenium.Framework;
 using Selenium.Framework.Features;
+using Selenium.Framework.Helpers;
 using Selenium.Framework.TestData;
-using Selenium.Pages;
 
 namespace Selenium.Tests
 {
+    /*[TestFixture]
+    [Parallelizable(ParallelScope.All)]*/
     public class RegisterTest : BaseTest
     {
         private RegistrationFeatures RegistrationFeatures;
-        private RegistrationPage RegistrationPage;
-        private ApplicationPage ApplicationPage;
         private LoginFeature LoginFeature;
-        private HomePage HomePage;
-        private HeaderPage HeaderPage;
+        private ApplicationFeatures ApplicationFeatures;
+        private HeaderFeatures HeaderFeatures;
+        private CSVReaderHelper CSVReaderHelper;
 
         [SetUp]
         protected void Initialize()
         {
             RegistrationFeatures = new RegistrationFeatures(Driver);
-            RegistrationPage = new RegistrationPage(Driver);
-            ApplicationPage = new ApplicationPage(Driver);
             LoginFeature = new LoginFeature(Driver);
-            HomePage = new HomePage(Driver);
-            HeaderPage = new HeaderPage(Driver);
+            ApplicationFeatures = new ApplicationFeatures(Driver);
+            HeaderFeatures = new HeaderFeatures(Driver);
+            CSVReaderHelper = new CSVReaderHelper();
         }
 
         [Test]
         public void RegisterNewUserTest()
         {
-            SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaUser());
             
-            Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(TestDataUsers.GetStenkinaUser().FirstName));
+            Assert.That(RegistrationFeatures.IsWelcomeTextDisplayed(), Is.True);
         }
 
         [Test]
         public void RegisterNewUserLogoutTest()
         {
-            SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaUser());
-            HeaderPage.Logout();
+            HeaderFeatures.Logout();
             LoginFeature.Login(TestDataUsers.GetStenkinaUser());
             
-            Assert.That(RegistrationPage.OnHeader().GetWelcomeText.Contains(TestDataUsers.GetStenkinaUser().FirstName));
+            Assert.That(RegistrationFeatures.IsWelcomeTextDisplayed(), Is.True);
         }
 
         [Test]
         public void RegisterDeveloperTest()
         {
-            SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaDeveloper());
-            HomePage.OpenMyApplicationPage();
-            ApplicationPage.OpenAddNewAppPage();
+            HeaderFeatures.OpenMyApplicationPage();
+            ApplicationFeatures.OpenAddNewAppPage();
 
-            Assert.That(ApplicationPage.SubmitButton.Displayed, Is.True);
+            Assert.That(RegistrationFeatures.IsSubmitButtonDisplayed(), Is.True);
         }
 
         [Test]
         public void RegisterNewUserAppTest()
         {
-            SiteNavigator.NavigateToRegistrationPage(Driver);
             RegistrationFeatures.RegisterUser(TestDataUsers.GetStenkinaUser());
             
             Assert.That(RegistrationFeatures.SearchForUploadOption(), Is.True);
@@ -69,8 +65,7 @@ namespace Selenium.Tests
         [Test]
         public void RegisterUsersCSV()
         {
-            var users = RegistrationFeatures.ReadUsersFromCsv(TestDataPath.UserForRegistrationPath);
-            SiteNavigator.NavigateToLoginPage(Driver);
+            var users = CSVReaderHelper.ReadUsersFromCsv(TestDataPath.UserForRegistrationPath);
             RegistrationFeatures.RegisterUsersAndValidate(users);
         }
     }
