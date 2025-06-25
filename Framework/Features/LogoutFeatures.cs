@@ -33,6 +33,5 @@ namespace Selenium.Framework.Features
             Driver.SwitchTo().Window(tabs[0]);
             Logger.Info("First browser tab is opened");
         }
-        
     }
 }
