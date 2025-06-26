@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f72f42f7-387c-49dd-916a-43604afddae4" name="Changes" comment="small update" />
+    <list default="true" id="f72f42f7-387c-49dd-916a-43604afddae4" name="Changes" comment="Rider push test">
+      <change beforePath="$PROJECT_DIR$/Selenium/Framework/Features/AJAXFeatures.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Selenium/Framework/Features/AJAXFeatures.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,16 +16,69 @@
     <option name="groupingKeys" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="Develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Selenium" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/AJAXFeatures.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/LoginFeature.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/LoginFeature.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Features/LogoutFeatures.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Framework/Pages/AJAXPage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/yevheniiastenkina/RiderProjects/estenkina-aut15/framework/C# Framework/Selenium/Tests/LoginTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "Develop",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;Develop&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="one more push check">
+      <option name="closed" value="true" />
+      <created>1750865558497</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750865558497</updated>
+    </task>
+    <task id="LOCAL-00002" summary="UI push check">
+      <option name="closed" value="true" />
+      <created>1750865987230</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750865987230</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Green tests with logs">
+      <option name="closed" value="true" />
+      <created>1750934611710</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750934611711</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Rider push test">
+      <option name="closed" value="true" />
+      <created>1750937183139</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750937183139</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
@@ -50,6 +105,13 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="one more push check" />
+    <MESSAGE value="UI push check" />
+    <MESSAGE value="Green tests with logs" />
+    <MESSAGE value="Rider push test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rider push test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
