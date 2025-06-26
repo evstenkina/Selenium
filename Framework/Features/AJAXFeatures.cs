@@ -19,7 +19,7 @@ namespace Selenium.Framework.Features
         public string ElementsSetUp(dynamic X, dynamic Y)
         {
             AJAXPage.X.SendKeys(X.ToString());
-            Logger.Info("X value is set");
+            Logger.Info("X is set");
             AJAXPage.Y.SendKeys(Y.ToString());
             Logger.Info("Y is set");
             AJAXPage.SumButton.Click();
