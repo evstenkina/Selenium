@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using Selenium.Pages;
 using log4net;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
@@ -13,6 +14,7 @@ namespace Selenium.Framework.Features
         public HeaderFeatures(IWebDriver driver)
         {
             HeaderPage = new HeaderPage(driver);
+            Logger = LogManager.GetLogger(typeof(HeaderFeatures)); 
         }
         
         public void OpenAjaxPage()

@@ -1,8 +1,8 @@
 using OpenQA.Selenium;
-using Selenium.Framework.Features;
 using Selenium.Framework.Helpers;
+using Selenium.Pages;
 
-namespace Selenium.Pages
+namespace Selenium.Framework.Pages
 {
     public class AJAXPage : BasePage
     {

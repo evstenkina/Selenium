@@ -2,6 +2,8 @@ using OpenQA.Selenium;
 using Selenium.Framework.TestData;
 using Selenium.Pages;
 using log4net;
+using Selenium.Framework.Models;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
@@ -15,6 +17,7 @@ namespace Selenium.Framework.Features
         {
             LoginPage = new LoginPage(driver);
             HomePage = new HomePage(driver);
+            Logger = LogManager.GetLogger(typeof(LoginFeature)); 
         }
         
         public HomePage Login(User user, bool isBaseURL = true)

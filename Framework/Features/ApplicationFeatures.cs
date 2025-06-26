@@ -2,13 +2,13 @@ using Newtonsoft.Json;
 using OpenQA.Selenium;
 using Selenium.Framework.Models;
 using Selenium.Framework.TestData;
-using Selenium.Pages;
 using log4net;
 using Selenium.Framework.Helpers;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
-    public class ApplicationFeatures : BaseTest
+    public class ApplicationFeatures
     {
         private ApplicationPage ApplicationPage;
         private WaitHelper WaitHelper;
@@ -23,6 +23,7 @@ namespace Selenium.Framework.Features
             WaitHelper = new WaitHelper(driver);
             LoginFeature = new LoginFeature(driver);
             HeaderFeatures = new HeaderFeatures(driver);
+            Logger = LogManager.GetLogger(typeof(ApplicationFeatures)); 
             Driver = driver;
         }
         
@@ -43,7 +44,6 @@ namespace Selenium.Framework.Features
         {
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             HeaderFeatures.OpenMyApplicationPage();
-            Logger.Info("My application page is opened");
         }
         
         public void AddApplication(bool withImage = true)
@@ -67,7 +67,6 @@ namespace Selenium.Framework.Features
         {
             LoginAndOpenMyApp();
             AddApplication(withImage);
-            Logger.Info("New application  is created");
         }
 
         public void GetJSONText()
@@ -98,14 +97,6 @@ namespace Selenium.Framework.Features
                 Driver.Navigate().Back();
             }  
         }
-        
-        /*public List<IWebElement> ApplicationList => Driver.FindElements(By.XPath("//div[@class='name']")).ToList();
-        public bool FindApplicationFromTheList(string expectedTitle)
-        {
-            var a = ApplicationList.Where(x => x.Text == expectedTitle).FirstOrDefault();
-            
-            return a != null;
-        }*/
 
         public void EditAppFeature()
         {
@@ -122,7 +113,6 @@ namespace Selenium.Framework.Features
         public void DownloadAppFeature()
         {
             ApplicationPage.Download.Click();
-            Logger.Info("Application is downloaded");
         }
 
         public bool ConfirmDeletedApp()

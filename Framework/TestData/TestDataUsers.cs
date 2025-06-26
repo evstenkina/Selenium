@@ -1,3 +1,5 @@
+using Selenium.Framework.Models;
+
 namespace Selenium.Framework.TestData
 {
     public class TestDataUsers

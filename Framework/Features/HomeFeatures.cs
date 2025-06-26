@@ -12,6 +12,7 @@ namespace Selenium.Framework.Features
         public HomeFeatures(IWebDriver driver)
         {
             HomePage = new HomePage(driver);
+            Logger = LogManager.GetLogger(typeof(HeaderFeatures)); 
         }
 
         public void OpenCreatedApp()

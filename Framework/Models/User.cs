@@ -1,14 +1,15 @@
-using System.Runtime.CompilerServices;
-
-public class User
+namespace Selenium.Framework.Models
 {
-    public string Login { get; set; }
+    public class User
+    {
+        public string Login { get; set; }
 
-    public string Password { get; set; }
+        public string Password { get; set; }
 
-    public string FirstName { get; set; }
+        public string FirstName { get; set; }
 
-    public string LastName { get; set; }
+        public string LastName { get; set; }
 
-    public string Role { get; set; }
+        public string Role { get; set; }
+    }
 }

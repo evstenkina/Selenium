@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Pages
 {
