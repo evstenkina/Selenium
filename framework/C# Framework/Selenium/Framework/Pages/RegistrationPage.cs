@@ -1,6 +1,6 @@
 using OpenQA.Selenium;
 
-namespace Selenium.Pages
+namespace Selenium.Framework.Pages
 {
     public class RegistrationPage : BasePage
     {

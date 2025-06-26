@@ -5,6 +5,8 @@ using Selenium.Framework.TestData;
 using Selenium.Pages;
 using log4net;
 using Selenium.Framework.Helpers;
+using Selenium.Framework.Models;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
@@ -22,6 +24,7 @@ namespace Selenium.Framework.Features
             WaitHelper = new WaitHelper(driver);
             ApplicationPage = new ApplicationPage(driver);
             HeaderFeatures = new HeaderFeatures(driver);
+            Logger = LogManager.GetLogger(typeof(RegistrationFeatures));
         }
         
         public void RegisterUsersAndValidate(List<User> users)

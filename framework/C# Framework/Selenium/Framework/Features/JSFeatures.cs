@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using Selenium.Framework.Models;
 using Selenium.Pages;
 using log4net;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
@@ -17,6 +18,7 @@ namespace Selenium.Framework.Features
         {
             Driver = driver;
             JSPage = new JSPage(driver);
+            Logger = LogManager.GetLogger(typeof(JSFeatures));
         }
         
         public void Execute()

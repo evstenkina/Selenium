@@ -3,6 +3,7 @@ using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using log4net;
+using Selenium.Framework.TestData;
 
 namespace Selenium.Framework.Helpers
 {

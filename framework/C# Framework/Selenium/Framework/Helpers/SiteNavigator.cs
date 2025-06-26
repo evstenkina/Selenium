@@ -1,5 +1,6 @@
 using System.Configuration;
 using OpenQA.Selenium;
+using Selenium.Framework.Pages;
 using Selenium.Pages;
 
 namespace Selenium.Framework.Helpers

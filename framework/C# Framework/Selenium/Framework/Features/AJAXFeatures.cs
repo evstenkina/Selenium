@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using Selenium.Pages;
 using log4net;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
@@ -12,6 +13,7 @@ namespace Selenium.Framework.Features
         public AJAXFeatures(IWebDriver driver)
         {
             AJAXPage = new AJAXPage(driver);
+            Logger = LogManager.GetLogger(typeof(AJAXFeatures)); 
         }
         
         public string ElementsSetUp(dynamic X, dynamic Y)

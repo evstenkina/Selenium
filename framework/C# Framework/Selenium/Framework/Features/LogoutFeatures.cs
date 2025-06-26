@@ -3,6 +3,7 @@ using System.Linq;
 using OpenQA.Selenium;
 using Selenium.Pages;
 using log4net;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
@@ -18,6 +19,7 @@ namespace Selenium.Framework.Features
         {
             Driver = driver;
             LoginPage = new LoginPage(Driver);
+            Logger = LogManager.GetLogger(typeof(LogoutFeatures));
         }
         
         public void OpenNewBrowserTab()

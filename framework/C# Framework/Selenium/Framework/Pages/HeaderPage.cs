@@ -1,6 +1,6 @@
 using OpenQA.Selenium;
 
-namespace Selenium.Pages
+namespace Selenium.Framework.Pages
 {
     public class HeaderPage : BasePage
     {
@@ -17,27 +17,5 @@ namespace Selenium.Pages
         public IWebElement AjaxPage => Driver.FindElement(By.XPath("//a[text()='Ajax test page']"));
         public IWebElement MyApplication => Driver.FindElement(By.XPath("//a[@href='/my' and normalize-space(text())='My applications']"));
         public IWebElement JSTestPage => Driver.FindElement(By.XPath("//a[text()='JS test page']"));
-        
-        /*public void OpenAjaxPage()
-        {
-            AjaxPage.Click();
-        }
-        
-        public void OpenMyApplicationPage()
-        {
-            MyApplication.Click();
-        }
-        
-        public void OpenJSTestPage()
-        {
-            JSTestPage.Click();
-        }
-
-        public LoginPage Logout()
-        {
-            LogOutLink.Click();
-
-            return new LoginPage(Driver);
-        }*/
     }
 }

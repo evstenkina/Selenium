@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Selenium.Framework
+namespace Selenium.Framework.TestData
 {
     public class TestDataPath
     {
