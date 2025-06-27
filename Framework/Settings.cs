@@ -17,10 +17,8 @@ namespace Selenium.Framework
             {
                 case "chrome":
                     return new ChromeDriver(driverPath);
-                    
                 case "firefox":
                     return new FirefoxDriver(driverPath);
-                
                 default:
                     throw new Exception("Unknown browser type!");
             }

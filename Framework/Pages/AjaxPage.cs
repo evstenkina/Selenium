@@ -18,7 +18,6 @@ namespace Selenium.Framework.Pages
         public IWebElement Y => Driver.FindElement(By.Id("y"));
         public IWebElement SumButton => Driver.FindElement(By.Id("calc"));
         public IWebElement ResultText => Driver.FindElement(resultTextLocator);
-        
 
         public string GetResultText()
         {

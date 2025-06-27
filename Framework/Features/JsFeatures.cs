@@ -17,7 +17,7 @@ namespace Selenium.Framework.Features
         {
             Driver = driver;
             JsPage = new JsPage(driver);
-            Logger = LogManager.GetLogger(typeof(JsFeatures));
+            Logger = LogManager.GetLogger(typeof(JsFeatures));//todo сделать класс для логера
         }
         
         public void Execute()
