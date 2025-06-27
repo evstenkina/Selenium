@@ -9,7 +9,7 @@ namespace Selenium.Framework.Helpers
 {
     public static class CsvReaderHelper
     {
-        public static List<User> ReadUsersFromCsv(string filePath) //todo to helper
+        public static List<User> ReadUsersFromCsv(string filePath)
         {
             var reader = new StreamReader(filePath);
             var csv = new CsvReader(reader, CultureInfo.InvariantCulture);

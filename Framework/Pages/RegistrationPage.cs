@@ -8,7 +8,7 @@ namespace Selenium.Framework.Pages
         {
         }
         
-        public By uploadOption = By.XPath("//a[text()='My applications']"); //todo to the page
+        public By uploadOption = By.XPath("//a[text()='My applications']");
         
         public IWebElement RegisterNewUserButton => Driver.FindElement(By.XPath("//*[@href='../register']"));
 
