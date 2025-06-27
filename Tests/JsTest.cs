@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.Framework;
@@ -6,18 +7,16 @@ using Selenium.Framework.TestData;
 
 namespace Selenium.Tests
 {
-    public class JSTest : BaseTest
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
+    public class JsTest : BaseTest
     {
-        private LoginFeature LoginFeature;
-        private JSFeatures JSFeatures;
-        private HeaderFeatures HeaderFeatures;
+        [ThreadStatic] private static JsFeatures JSFeatures;
 
         [SetUp]
         protected void Initialize()
         {
-            LoginFeature = new LoginFeature(Driver);
-            JSFeatures = new JSFeatures(Driver);
-            HeaderFeatures = new HeaderFeatures(Driver);
+            JSFeatures = new JsFeatures(Driver);
         }
 
         [Test]
@@ -27,7 +26,7 @@ namespace Selenium.Tests
             LoginFeature.Login(TestDataUsers.GetDefaultUser());
             Logger.Info("Assert default user login");
             
-            HeaderFeatures.OpenJSTestPage();
+            HeaderFeatures.OpenJsTestPage();
             JSFeatures.Execute();
             
             IAlert alert = Driver.SwitchTo().Alert();

@@ -1,5 +1,4 @@
 using OpenQA.Selenium;
-using Selenium.Pages;
 using log4net;
 using Selenium.Framework.Pages;
 
@@ -7,9 +6,8 @@ namespace Selenium.Framework.Features
 {
     public class HeaderFeatures
     {
-        private HeaderPage HeaderPage;
-        private IWebDriver Driver;
-        protected ILog Logger;
+        private readonly HeaderPage HeaderPage;
+        private readonly ILog Logger;
 
         public HeaderFeatures(IWebDriver driver)
         {
@@ -29,17 +27,15 @@ namespace Selenium.Framework.Features
             Logger.Info("My application page is opened");
         }
         
-        public void OpenJSTestPage()
+        public void OpenJsTestPage()
         {
             HeaderPage.JSTestPage.Click();
             Logger.Info("JS page is opened");
         }
 
-        public LoginPage Logout()
+        public void Logout()
         {
             HeaderPage.LogOutLink.Click();
-
-            return new LoginPage(Driver);
         }
     }
 }

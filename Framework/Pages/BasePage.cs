@@ -1,13 +1,12 @@
 using OpenQA.Selenium;
-using Selenium.Pages;
 
 namespace Selenium.Framework.Pages
 {
     public class BasePage
     {
-        public IWebDriver Driver;
+        protected readonly IWebDriver Driver;
 
-        public BasePage(IWebDriver driver)
+        protected BasePage(IWebDriver driver)
         {
             Driver = driver;
         }

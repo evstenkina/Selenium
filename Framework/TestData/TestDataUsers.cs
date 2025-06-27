@@ -20,10 +20,7 @@ namespace Selenium.Framework.TestData
 
         public static User GetStenkinaUser()
         {
-            return new User
-            {
-                FirstName = "Yevheniia", LastName = "Stenkina", Password = "123", Login = "Yevheniia", Role = UserRole
-            };
+            return new User { FirstName = "Yevheniia", LastName = "Stenkina", Password = "123", Login = "Yevheniia", Role = UserRole };
         }
 
         public static User GetStenkinaDeveloper()

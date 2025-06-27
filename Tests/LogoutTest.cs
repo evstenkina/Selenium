@@ -1,27 +1,23 @@
+using System;
 using NUnit.Framework;
 using Selenium.Framework;
 using Selenium.Framework.Features;
-using Selenium.Framework.Helpers;
 using Selenium.Framework.TestData;
 
 namespace Selenium.Tests
 {
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class LogoutTests : BaseTest
     {
-        private LoginFeature LoginFeature;
-        private LogoutFeatures LogoutFeatures;
-        private HomeFeatures HomeFeatures;
-        private HeaderFeatures HeaderFeatures;
-        
+        [ThreadStatic] private static LogoutFeatures LogoutFeatures;
+        [ThreadStatic] private static HomeFeatures HomeFeatures;
 
         [SetUp]
         protected void Initialize()
         {
-            LoginFeature = new LoginFeature(Driver);
             LogoutFeatures = new LogoutFeatures(Driver);
             HomeFeatures = new HomeFeatures(Driver);
-            HeaderFeatures = new HeaderFeatures(Driver);
-            SiteNavigator.NavigateToLoginPage(Driver);
         }
 
         [Test]

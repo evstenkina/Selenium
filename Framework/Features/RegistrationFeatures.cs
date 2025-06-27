@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.Framework.TestData;
-using Selenium.Pages;
 using log4net;
 using Selenium.Framework.Helpers;
 using Selenium.Framework.Models;
@@ -12,11 +11,11 @@ namespace Selenium.Framework.Features
 {
     public class RegistrationFeatures
     {
-        private RegistrationPage RegistrationPage;
-        private WaitHelper WaitHelper;
-        private ApplicationPage ApplicationPage;
-        private HeaderFeatures HeaderFeatures;
-        protected ILog Logger;
+        private readonly RegistrationPage RegistrationPage;
+        private readonly WaitHelper WaitHelper;
+        private readonly ApplicationPage ApplicationPage;
+        private readonly HeaderFeatures HeaderFeatures;
+        private readonly ILog Logger;
 
         public RegistrationFeatures(IWebDriver driver)
         {

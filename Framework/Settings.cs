@@ -1,18 +1,14 @@
 using System;
-using System.IO;
 using System.Configuration;
+using System.IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Safari;
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
 
 namespace Selenium.Framework
 {
     public class Settings
     {
-        
         public IWebDriver GetDriver()
         {
             var driverPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Drivers");
@@ -20,14 +16,11 @@ namespace Selenium.Framework
             switch (GetBrowserType())
             {
                 case "chrome":
-                    var options = new ChromeOptions();
-                    options.AddArgument("--no-sandbox");
-                    options.AddArgument("--disable-gpu");
-                    options.AddArgument("--disable-dev-shm-usage");
+                    return new ChromeDriver(driverPath);
                     
-                    return new ChromeDriver(driverPath, options);
                 case "firefox":
                     return new FirefoxDriver(driverPath);
+                
                 default:
                     throw new Exception("Unknown browser type!");
             }
@@ -39,7 +32,7 @@ namespace Selenium.Framework
         }
         public static string GetAuthUrl()
         {
-            return ConfigurationManager.AppSettings["authURL"];;
+            return ConfigurationManager.AppSettings["authURL"];
         }
 
         public static string GetBrowserType()

@@ -6,22 +6,18 @@ using Selenium.Framework.TestData;
 
 namespace Selenium.Tests
 {
-    /*[TestFixture]
-    [Parallelizable(ParallelScope.All)]*/
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class ApplicationTests : BaseTest
     {
-        private LoginFeature LoginFeature;
-        private ApplicationFeatures ApplicationFeatures;
-        private HomeFeatures HomeFeatures;
-        private HeaderFeatures HeaderFeatures;
+        [ThreadStatic] private static ApplicationFeatures ApplicationFeatures;
+        [ThreadStatic] private static HomeFeatures HomeFeatures;
 
         [SetUp]
         protected void Initialize()
         {
-            LoginFeature = new LoginFeature(Driver);
             ApplicationFeatures = new ApplicationFeatures(Driver);
             HomeFeatures = new HomeFeatures(Driver);
-            HeaderFeatures = new HeaderFeatures(Driver);
         }
 
         [Test]

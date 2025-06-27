@@ -1,7 +1,6 @@
 using OpenQA.Selenium;
-using Selenium.Framework.Pages;
 
-namespace Selenium.Pages
+namespace Selenium.Framework.Pages
 {
     public class HomePage : BasePage
     {

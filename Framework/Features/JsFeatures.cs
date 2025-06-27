@@ -2,33 +2,32 @@ using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using Selenium.Framework.Models;
-using Selenium.Pages;
 using log4net;
 using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
-    public class JSFeatures
+    public class JsFeatures
     {
-        private JSPage JSPage;
-        private IWebDriver Driver;
-        protected ILog Logger;
+        private readonly JsPage JsPage;
+        private readonly IWebDriver Driver;
+        private readonly ILog Logger;
 
-        public JSFeatures(IWebDriver driver)
+        public JsFeatures(IWebDriver driver)
         {
             Driver = driver;
-            JSPage = new JSPage(driver);
-            Logger = LogManager.GetLogger(typeof(JSFeatures));
+            JsPage = new JsPage(driver);
+            Logger = LogManager.GetLogger(typeof(JsFeatures));
         }
         
         public void Execute()
         {
             GetCoordinates();
-            JSPage.TopInputField.SendKeys(GetCoordinates().Top.ToString());
+            JsPage.TopInputField.SendKeys(GetCoordinates().Top.ToString());
             Logger.Info("Top coordinate is set");
-            JSPage.LeftInputField.SendKeys(GetCoordinates().Left.ToString());
+            JsPage.LeftInputField.SendKeys(GetCoordinates().Left.ToString());
             Logger.Info("Left coordinate is set");
-            JSPage.Process.Click();
+            JsPage.Process.Click();
             Logger.Info("Result is procced");
         }
 
@@ -46,7 +45,7 @@ namespace Selenium.Framework.Features
             // Приводит результат выполнения Javascript в словарь
             //Выполняем JavaScript в браузере и передаём туда JSElement (элемент, координаты которого хотим получить).
             // Получаем результат в виде словаря (ключи: "top" и "left"), потому что JS возвращает объект.
-            var result = (Dictionary<string, object>)JSExecutor.ExecuteScript(script, JSPage.JSElement);
+            var result = (Dictionary<string, object>)JSExecutor.ExecuteScript(script, JsPage.JsElement);
             //Извлекаем значения top и left из словаря и конвертируем их в int, чтобы использовать в C# как числа.
             var top = Convert.ToInt32(result["top"]);
             var left = Convert.ToInt32(result["left"]);

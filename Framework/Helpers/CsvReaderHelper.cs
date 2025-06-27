@@ -7,11 +7,11 @@ using Selenium.Framework.Models;
 
 namespace Selenium.Framework.Helpers
 {
-    public class CSVReaderHelper
+    public static class CsvReaderHelper
     {
-        public List<User> ReadUsersFromCsv(string a) //todo to helper
+        public static List<User> ReadUsersFromCsv(string filePath) //todo to helper
         {
-            var reader = new StreamReader(a);
+            var reader = new StreamReader(filePath);
             var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
             return csv.GetRecords<User>().ToList();

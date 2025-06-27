@@ -1,6 +1,5 @@
 using OpenQA.Selenium;
 using Selenium.Framework.TestData;
-using Selenium.Pages;
 using log4net;
 using Selenium.Framework.Models;
 using Selenium.Framework.Pages;
@@ -9,18 +8,18 @@ namespace Selenium.Framework.Features
 {
     public class LoginFeature
     {
-        private LoginPage LoginPage;
-        private HomePage HomePage;
-        protected ILog Logger;
+        private readonly LoginPage LoginPage;
+        private readonly ILog Logger;
+        
+        private const string ExpectedResultText = "invalid username or password";
 
         public LoginFeature(IWebDriver driver)
         {
             LoginPage = new LoginPage(driver);
-            HomePage = new HomePage(driver);
             Logger = LogManager.GetLogger(typeof(LoginFeature)); 
         }
         
-        public HomePage Login(User user, bool isBaseURL = true)
+        public void Login(User user, bool isBaseURL = true)
         {
             if (isBaseURL)
             {
@@ -30,20 +29,16 @@ namespace Selenium.Framework.Features
                 Logger.Info("Password is added");
                 LoginPage.LoginButton.Click();
             }
-            
-            return HomePage;
         }
         
         public bool IsWelcomeTextDisplayed()
         {
-            var user = TestDataUsers.GetDefaultUser();
-            return LoginPage.OnHeader().GetWelcomeText.Contains(user.FirstName);
+            return LoginPage.OnHeader().GetWelcomeText.Contains(TestDataUsers.GetDefaultUser().FirstName);
         }
         
         public bool IsInvalidUserMessageDisplayed()
         {
-            string expectedResultText = "invalid username or password";
-            return LoginPage.GetFlashMessage().Contains(expectedResultText);
+            return LoginPage.GetFlashMessage().Contains(ExpectedResultText);
         }
     }
 }

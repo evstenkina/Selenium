@@ -1,21 +1,18 @@
 using System.Configuration;
 using OpenQA.Selenium;
 using Selenium.Framework.Pages;
-using Selenium.Pages;
 
 namespace Selenium.Framework.Helpers
 {
-    public class SiteNavigator
+    public static class SiteNavigator
     {
-        public static LoginPage NavigateToLoginPage(IWebDriver driver, bool isBaseURL = true)
+        public static void NavigateToLoginPage(IWebDriver driver, bool isBaseUrl = true)
         {
-            string URL = isBaseURL
+            string url = isBaseUrl
                 ? Settings.GetBaseUrl()
                 : Settings.GetAuthUrl();
 
-            driver.Navigate().GoToUrl(URL);
-
-            return new LoginPage(driver);
+            driver.Navigate().GoToUrl(url);
         }
 
         public static RegistrationPage NavigateToRegistrationPage(IWebDriver driver)

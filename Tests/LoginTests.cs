@@ -1,22 +1,14 @@
 using NUnit.Framework;
 using Selenium.Framework;
-using Selenium.Framework.Features;
 using Selenium.Framework.Helpers;
 using Selenium.Framework.TestData;
 
 namespace Selenium.Tests
 {
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class LoginTests : BaseTest
     {
-        private LoginFeature LoginFeature;
-
-        [SetUp]
-        protected void Initialize()
-        {
-            LoginFeature = new LoginFeature(Driver);
-        }
-
-        [Test]
         [TestCase(true)]
         [TestCase(false)]
         public void ValidLoginTest(bool isBaseURL)

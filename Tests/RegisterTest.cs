@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Selenium.Framework;
 using Selenium.Framework.Features;
@@ -6,24 +7,16 @@ using Selenium.Framework.TestData;
 
 namespace Selenium.Tests
 {
-    /*[TestFixture]
-    [Parallelizable(ParallelScope.All)]*/
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class RegisterTest : BaseTest
     {
-        private RegistrationFeatures RegistrationFeatures;
-        private LoginFeature LoginFeature;
-        private ApplicationFeatures ApplicationFeatures;
-        private HeaderFeatures HeaderFeatures;
-        private CSVReaderHelper CSVReaderHelper;
-
+        [ThreadStatic] private static ApplicationFeatures ApplicationFeatures;
+        
         [SetUp]
         protected void Initialize()
         {
-            RegistrationFeatures = new RegistrationFeatures(Driver);
-            LoginFeature = new LoginFeature(Driver);
             ApplicationFeatures = new ApplicationFeatures(Driver);
-            HeaderFeatures = new HeaderFeatures(Driver);
-            CSVReaderHelper = new CSVReaderHelper();
         }
 
         [Test]
@@ -63,9 +56,9 @@ namespace Selenium.Tests
         }
 
         [Test]
-        public void RegisterUsersCSV()
+        public void RegisterUsersCsv()
         {
-            var users = CSVReaderHelper.ReadUsersFromCsv(TestDataPath.UserForRegistrationPath);
+            var users = CsvReaderHelper.ReadUsersFromCsv(TestDataPath.UserForRegistrationPath);
             RegistrationFeatures.RegisterUsersAndValidate(users);
         }
     }

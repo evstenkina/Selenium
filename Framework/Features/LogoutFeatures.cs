@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
-using Selenium.Pages;
 using log4net;
 using Selenium.Framework.Pages;
 
@@ -9,9 +8,9 @@ namespace Selenium.Framework.Features
 {
     public class LogoutFeatures
     {
-        private IWebDriver Driver;
-        private LoginPage LoginPage;
-        protected ILog Logger;
+        private readonly IWebDriver Driver;
+        private readonly LoginPage LoginPage;
+        protected readonly ILog Logger;
         
         public bool IsLoginButtDisp() => LoginPage.LoginButton.Displayed;
         

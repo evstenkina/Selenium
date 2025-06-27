@@ -1,14 +1,13 @@
 using OpenQA.Selenium;
 using Selenium.Framework.Helpers;
-using Selenium.Pages;
 
 namespace Selenium.Framework.Pages
 {
-    public class AJAXPage : BasePage
+    public class AjaxPage : BasePage
     {
         private WaitHelper WaitHelper;
 
-        public AJAXPage(IWebDriver driver) : base(driver)
+        public AjaxPage(IWebDriver driver) : base(driver)
         {
             WaitHelper = new WaitHelper(driver);
         }

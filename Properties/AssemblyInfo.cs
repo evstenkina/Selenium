@@ -36,5 +36,5 @@ using NUnit.Framework;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config")]
 
-[assembly: Parallelizable(ParallelScope.All)] // Параллельный запуск разных классов
+[assembly: Parallelizable(ParallelScope.Fixtures)] // Параллельный запуск разных классов
 [assembly: LevelOfParallelism(6)] // Количество потоков

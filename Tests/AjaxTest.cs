@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Selenium.Framework;
 using Selenium.Framework.Features;
@@ -5,18 +6,16 @@ using Selenium.Framework.TestData;
 
 namespace Selenium.Tests
 {
-    public class AJAXTest : BaseTest
-    {
-        private LoginFeature LoginFeature;
-        private AJAXFeatures AJAXFeatures;
-        private HeaderFeatures HeaderFeatures;
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
+    public class AjaxTest : BaseTest
+    { 
+        [ThreadStatic] private static AjaxFeatures AJAXFeatures;
 
         [SetUp]
         protected void Initialize()
         {
-            LoginFeature = new LoginFeature(Driver);
-            AJAXFeatures = new AJAXFeatures(Driver);
-            HeaderFeatures = new HeaderFeatures(Driver);
+            AJAXFeatures = new AjaxFeatures(Driver);
         }
 
         [Test]

@@ -10,12 +10,13 @@ namespace Selenium.Framework.Features
 {
     public class ApplicationFeatures
     {
-        private ApplicationPage ApplicationPage;
-        private WaitHelper WaitHelper;
-        private LoginFeature LoginFeature;
-        private HeaderFeatures HeaderFeatures;
-        public static IWebDriver Driver;
-        protected ILog Logger;
+        private ILog Logger;
+        private readonly IWebDriver Driver;
+        
+        private readonly ApplicationPage ApplicationPage;
+        private readonly WaitHelper WaitHelper;
+        private readonly LoginFeature LoginFeature;
+        private readonly HeaderFeatures HeaderFeatures;
 
         public ApplicationFeatures(IWebDriver driver)
         {
@@ -85,6 +86,7 @@ namespace Selenium.Framework.Features
         { 
             WaitHelper.WaitForElementNotExist(ApplicationPage.searchForApp);
             Logger.Info("Deleted application is not found");
+            
             return true;
         }
         

@@ -1,13 +1,13 @@
 using OpenQA.Selenium;
-using Selenium.Pages;
 using log4net;
+using Selenium.Framework.Pages;
 
 namespace Selenium.Framework.Features
 {
     public class HomeFeatures
     {
-        private HomePage HomePage;
-        protected ILog Logger;
+        private readonly HomePage HomePage;
+        private readonly ILog Logger;
 
         public HomeFeatures(IWebDriver driver)
         {

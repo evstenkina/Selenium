@@ -1,18 +1,18 @@
 using System;
 using System.IO;
-using NUnit.Framework;
-using OpenQA.Selenium;
 using log4net;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using OpenQA.Selenium;
 using Selenium.Framework.TestData;
 
 namespace Selenium.Framework.Helpers
 {
-    public static class ScreenshotHelper
+    public class ScreenshotHelper
     {
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(ScreenshotHelper));
         public static void TakeScreenshot(IWebDriver driver)
         {
-            if (TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed)
+            if (TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
             {
                 Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
                 var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
@@ -22,7 +22,7 @@ namespace Selenium.Framework.Helpers
                 var filePath = Path.Combine(screenshotsDir, fileName);
                 screenshot.SaveAsFile(filePath);
                 TestContext.AddTestAttachment(filePath, "Screenshot on Failure");
-                Logger.Info("Screenshot on failure is created");
+                LogManager.GetLogger(typeof(ScreenshotHelper)).Info("Screenshot on failure is created");
             }
         }
     }
